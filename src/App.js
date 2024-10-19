@@ -1,19 +1,15 @@
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 import Video from "./components/Video/Video";
-import db from "./firebase";
+import "./App.css";
 import "./App.css";
 import Footer from "./components/BottomNav/Footer";
 import Header from "./components/Header/Header";
 
 function App() {
-  const [videos, setVideos] = useState([]);
 
-  useEffect(() => {
-    db.collection("videos").onSnapshot((snapshot) =>
-      setVideos(snapshot.docs.map((doc) => doc.data()))
-    );
-   
-  }, []);
+
+  const [videos] = useState([ { url: "https://awssportreels.s3.eu-central-1.amazonaws.com/BK+studenten+2023.MP4", title: "BK Studenten" , description:"blablla" } , { url: "https://awssportreels.s3.eu-central-1.amazonaws.com/BK-2024.mov", title: "BK 2024", description:"blablla"  } ]);
+ 
 
   return (
     // BEM
@@ -23,22 +19,16 @@ function App() {
       <div className="app__videos">
         {videos
           .sort((a, b) => a.index - b.index)
-          .map(({ index, url, title, description, quizOptions, hasQuiz }) => {
-            const myArray = quizOptions.quizDisplayTimeStamp.split(":");
-            const displayQuizTimestampInt =
-              Number(myArray[0]) * 60 + Number(myArray[1]);
+          .map(({ index, url, title, description}) => {
+            console.log(index)
             return (
               <>
                 <Video
-                  key={index}
+                  key={"0"}
                   url={url}
                   title={title}
                   description={description}
-                  quizOptions={quizOptions}
-                  displayQuizTimestampString={quizOptions.quizDisplayTimeStamp}
-                  displayQuizTimestampInt={displayQuizTimestampInt}
-                  hasQuiz={hasQuiz}
-                  index={index}
+                  index={"0"}
                 />
               </>
             );

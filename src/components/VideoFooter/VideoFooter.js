@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import "./VideoFooter.css";
 import TextTruncate from "react-text-truncate"; // recommend
 import QuizOptions from "../QuizOptions/QuizOptions";
-import { MdQuiz } from "react-icons/md";
+
 // import useVideoPlayer from "../../hooks/useVideoPlayer";
 function VideoFooter({
   title,
@@ -32,7 +32,7 @@ function VideoFooter({
         </div>
         <div className="post-pic">
           {hasQuiz ? (
-            <MdQuiz className="icons" />
+            <h1>MDQUIZ ICON</h1>
           ) : (
             <img
               alt="pic of course"

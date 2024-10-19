@@ -12,12 +12,8 @@ import "./Video.css";
 function Video({
   url,
   description,
-  quizOptions,
-  displayQuizTimestampInt,
-  hasQuiz,
   title,
   index,
-  displayQuizTimestampString,
 }) {
   const videoRef = useRef(null);
   const [playerState, setPlayerState] = useState({
@@ -29,13 +25,12 @@ function Video({
     loadedSeconds: 0,
     playbackRate: 1.0,
     loop: true,
-    isQuizDisplayed: false,
     videoElement: null,
     seeking: false,
     playedSeconds: 0,
   });
-  const [displayQuiz, setDisplayQuiz] = useState(false);
-  const [isOptionSelected, setIsOptionSelected] = useState(false);
+
+
   const [note, setNote] = useState({
     active: false,
     title: "title",
@@ -66,23 +61,7 @@ function Video({
     }));
   };
 
-  const handleProgress = (state) => {
-    // console.log("onProgress", state);
-    if (hasQuiz) {
-      if (
-        parseInt(playerState.playedSeconds) ===
-          parseInt(displayQuizTimestampInt) &&
-        playing
-      ) {
-        setDisplayQuiz(true);
-        handlePause();
-      } else {
-        setPlayerState((prevPlayerState) => ({ ...prevPlayerState, ...state }));
-      }
-    } else {
-      setPlayerState((prevPlayerState) => ({ ...prevPlayerState, ...state }));
-    }
-  };
+
 
   const handlePlay = () => {
     // console.log("onPlay");
@@ -119,21 +98,6 @@ function Video({
     setNote({ ...note, active: false });
   };
 
-  const handleQuizOptionSelect = (index, quizOptions) => {
-    console.log(index, quizOptions.redirectTimestamps[index]);
-    const myArray = quizOptions.redirectTimestamps[index].split(":");
-    const manualChange = Number(myArray[0]) * 60 + Number(myArray[1]);
-    const updatedTimeFraction = manualChange / playerState.loadedSeconds;
-    console.log("updatedTimeFraction", updatedTimeFraction, manualChange);
-    videoRef.current.seekTo(updatedTimeFraction, "fraction");
-    setPlayerState((prevPlayerState) => ({
-      ...prevPlayerState,
-      played: updatedTimeFraction,
-      playing: true,
-    }));
-    setDisplayQuiz(false);
-    setIsOptionSelected(true);
-  };
 
   const { playing, volume, muted, loop, played, playbackRate } = playerState;
 
@@ -163,7 +127,7 @@ function Video({
           // onSeek={(e) => console.log("onSeek", e)}
           // onEnded={handleEnded}
           // onError={(e) => console.log("onError", e)}
-          onProgress={(e) => handleProgress(e, displayQuizTimestampInt)}
+        
           // onDuration={handleDuration}
         />
       </div>
@@ -184,11 +148,6 @@ function Video({
           <VideoFooter
             title={title}
             description={description}
-            displayQuiz={displayQuiz}
-            quizOptions={hasQuiz ? quizOptions : []}
-            handleQuizOptionSelect={hasQuiz ? handleQuizOptionSelect : null}
-            isOptionSelected={isOptionSelected}
-            hasQuiz={hasQuiz ?? false}
           />
         </>
       ) : null}

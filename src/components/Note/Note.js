@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import "./Note.css";
 import TextTruncate from "react-text-truncate";
-import { MdClear } from "react-icons/md";
+
 
 function Note({note, handleCloseNote}) {
   const [max, setMax] = useState(false);
@@ -10,7 +10,7 @@ function Note({note, handleCloseNote}) {
     <div className="note__container">
       <div className="note__header">
         Take a note @{note.timestamp}
-        <MdClear onClick={handleCloseNote}/>
+    
       </div>
       <div className="note__input-container">
         <input
