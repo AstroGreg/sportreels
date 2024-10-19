@@ -1,2 +1,6 @@
  export NODE_OPTIONS=--openssl-legacy-provider`
  npm install --legacy-peer-deps    
+
+
+npm install -g npm-check-updates
+ncu -u (run 2x)
