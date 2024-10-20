@@ -17,22 +17,9 @@ function Video({
   setVideoRef
 }) {
   const videoRef = useRef(null);
+  const [muted, setMuted] = useState(true);
+  
 
-  
-  const [playerState, setPlayerState] = useState({
-    playing: true,
-    volume: 0.01,
-    muted: false,
-    played: 0,
-    loaded: 0,
-    loadedSeconds: 0,
-    playbackRate: 1.0,
-    loop: true,
-    videoElement: null,
-    seeking: false,
-    playedSeconds: 0,
-  
-  });
 
   const [note, setNote] = useState({
     active: false,
@@ -44,56 +31,56 @@ function Video({
 
 
   const handlePlayPause = () => {
-    setPlayerState({ ...playerState, playing: !playerState.playing });
+    // setPlayerState({ ...playerState, playing: !playerState.playing });
   };
   const handleSkipTo = (e) => {
     const manualNumberInDecimal = parseFloat(e.target.value) / 100;
     console.log("manualNumberInDecimal", manualNumberInDecimal);
-    setPlayerState({ ...playerState, playing: false });
+    // setPlayerState({ ...playerState, playing: false });
     videoRef.current.seekTo(manualNumberInDecimal, "fraction");
-    setPlayerState((prevPlayerState) => ({
-      ...prevPlayerState,
-      played: manualNumberInDecimal,
-    }));
+    // setPlayerState((prevPlayerState) => ({
+    //   ...prevPlayerState,
+    //   played: manualNumberInDecimal,
+    // }));
   };
 
 
 
   const handlePlay = () => {
     console.log("onPlay");
-    setPlayerState({ ...playerState, playing: true });
+    // setPlayerState({ ...playerState, playing: true });
   };
 
   const handlePause = () => {
     // console.log("onPause");
-    setPlayerState({ ...playerState, playing: false });
+    // setPlayerState({ ...playerState, playing: false });
   };
 
   const handleMuteUnmute = () => {
-    setPlayerState({ ...playerState, muted: !playerState.muted });
+    setMuted(!muted);
   };
 
 
-  const handleTakeNote = () => {
-    console.log(
-      "Taking note at: ",
-      playerState.playedSeconds,
-      title,
-      description
-    );
-    handlePause();
-    const timestamp = new Date(playerState.playedSeconds * 1000).toISOString().slice(14, 19);
-    setNote({
-      ...note,
-      active: true,
-      title,
-      description,
-      timestamp
-    });
-  };
-  const handleCloseNote = () => {
-    setNote({ ...note, active: false });
-  };
+  // const handleTakeNote = () => {
+  //   console.log(
+  //     "Taking note at: ",
+  //     playerState.playedSeconds,
+  //     title,
+  //     description
+  //   );
+  //   handlePause();
+  //   const timestamp = new Date(playerState.playedSeconds * 1000).toISOString().slice(14, 19);
+  //   setNote({
+  //     ...note,
+  //     active: true,
+  //     title,
+  //     description,
+  //     timestamp
+  //   });
+  // };
+  // const handleCloseNote = () => {
+  //   setNote({ ...note, active: false });
+  // };
 
   const onVideoPress = () => {
     if (videoRef.current.paused) {
@@ -103,13 +90,13 @@ function Video({
     }
   };
 
-  const { playing, volume, muted, loop, played, playbackRate } = playerState;
+  // const { playing, volume, muted, loop, played, playbackRate } = playerState;
 
   return (
     <div className="video">
-      <div className="video_click" onClick={() => handlePlayPause()}>
-        {note.active && <Note note={note} handleCloseNote={handleCloseNote} />}
- 
+
+        {/* {note.active && <Note note={note} handleCloseNote={handleCloseNote} />}
+  */}
         <video
         className="player"
         onClick={onVideoPress}
@@ -121,12 +108,11 @@ function Video({
         height={"100%"}
         playsInline={true}
         loop
-        muted
+        muted={muted}
         src={url}
       ></video> 
  
-      </div>
-      <input
+      {/* <input
         className="videofooter"
         type="range"
         style={{ backgroundSize: `${played * 100}%` }}
@@ -137,7 +123,7 @@ function Video({
         onChange={(e) => {
           handleSkipTo(e);
         }}
-      />
+      /> */}
   
           <VideoFooter
             title={title}
@@ -148,8 +134,8 @@ function Video({
       <VideoSidebar
         muted={muted}
         handleMuteUnmute={handleMuteUnmute}
-        playing={playing}
-        handleTakeNote={handleTakeNote}
+        // // playing={playing}
+        // handleTakeNote={handleTakeNote}
       />
     </div>
   );
