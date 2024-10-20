@@ -4,6 +4,7 @@ import "./App.css";
 import "./App.css";
 import Footer from "./components/BottomNav/Footer";
 import Header from "./components/Header/Header";
+import Sandbox from "./sandbox/index"
 
 function App() {
 
@@ -18,19 +19,18 @@ function App() {
       <Header />
       <div className="app__videos">
         {videos
-          .sort((a, b) => a.index - b.index)
           .map(({url, title, description}, index) => {
             console.log(index)
             return (
-              <>
                 <Video
                   key={index}
                   url={url}
                   title={title}
                   description={description}
                   index={index}
+              
                 />
-              </>
+
             );
           })}
       </div>

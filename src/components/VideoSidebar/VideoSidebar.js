@@ -7,11 +7,8 @@ function VideoSidebar({ muted, handleMuteUnmute, handleTakeNote }) {
   // const { handleSkipToTime } = useVideoPlayer(videoRef);
   return (
     <div className="videoSidebar">
-      <div className="videoSidebar__button">
-
-        <div><small><strong>7/10</strong></small></div>
-      </div>
-      
+  
+    
       <div className="videoSidebar__button" onClick={handleTakeNote}>
         <div><small><strong>Note</strong></small></div>
       </div>

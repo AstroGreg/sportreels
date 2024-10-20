@@ -16,8 +16,10 @@ function Video({
   index,
 }) {
   const videoRef = useRef(null);
+  const playerRef = useRef(null); 
+  
   const [playerState, setPlayerState] = useState({
-    playing: false,
+    playing: true,
     volume: 0.01,
     muted: false,
     played: 0,
@@ -30,7 +32,6 @@ function Video({
     playedSeconds: 0,
   });
 
-
   const [note, setNote] = useState({
     active: false,
     title: "title",
@@ -39,14 +40,31 @@ function Video({
   });
 
   useEffect(() => {
-    const elem = document.querySelector("#video0");
-    elem.addEventListener("scroll", () => {
-      console.log("scroll event fired!");
-      // Y
-      // const y = videoRef.current;
-      console.log(elem.getBoundingClientRect());
-    });
-  }, [videoRef]);
+    const observer = new IntersectionObserver(
+      ([entry]) => {
+        if (entry.isIntersecting) {
+          setPlayerState((prev) => ({ ...prev, playing: true }));
+        } else {
+          setPlayerState((prev) => ({ ...prev, playing: false }));
+        }
+      },
+      { threshold: 0.5 }
+    );
+  
+    const currentVideoRef = videoRef.current; // Will cause bugs if deleted
+    
+    if (currentVideoRef) {
+      observer.observe(currentVideoRef);
+    }
+  
+    return () => {
+      if (currentVideoRef) {
+        observer.unobserve(currentVideoRef);
+      }
+    };
+  }, [videoRef]); 
+
+
 
   const handlePlayPause = () => {
     setPlayerState({ ...playerState, playing: !playerState.playing });
@@ -54,7 +72,8 @@ function Video({
   const handleSkipTo = (e) => {
     const manualNumberInDecimal = parseFloat(e.target.value) / 100;
     console.log("manualNumberInDecimal", manualNumberInDecimal);
-    videoRef.current.seekTo(manualNumberInDecimal, "fraction");
+    setPlayerState({ ...playerState, playing: false });
+    playerRef.current.seekTo(manualNumberInDecimal, "fraction");
     setPlayerState((prevPlayerState) => ({
       ...prevPlayerState,
       played: manualNumberInDecimal,
@@ -64,7 +83,7 @@ function Video({
 
 
   const handlePlay = () => {
-    // console.log("onPlay");
+    console.log("onPlay");
     setPlayerState({ ...playerState, playing: true });
   };
 
@@ -76,6 +95,7 @@ function Video({
   const handleMuteUnmute = () => {
     setPlayerState({ ...playerState, muted: !playerState.muted });
   };
+
 
   const handleTakeNote = () => {
     console.log(
@@ -103,14 +123,15 @@ function Video({
 
   return (
     <div className="video">
-      <div className="video_click" onClick={() => handlePlayPause()}>
+      <div className="video_click" ref={videoRef} onClick={() => handlePlayPause()}>
         {note.active && <Note note={note} handleCloseNote={handleCloseNote} />}
+ 
         <ReactPlayer
           id={"video" + index}
-          ref={videoRef}
+          ref={playerRef}
           className="video__player"
           url={url}
-          playing={playing && !note.active}
+          playing={playing && !note.active }
           width={"100%"}
           height={"100%"}
           playsinline={true}
@@ -129,7 +150,8 @@ function Video({
           // onError={(e) => console.log("onError", e)}
         
           // onDuration={handleDuration}
-        />
+        />   
+ 
       </div>
       <input
         className="videofooter"
@@ -143,14 +165,12 @@ function Video({
           handleSkipTo(e);
         }}
       />
-      {!playing ? (
-        <>
+  
           <VideoFooter
             title={title}
             description={description}
           />
-        </>
-      ) : null}
+      
 
       <VideoSidebar
         muted={muted}
