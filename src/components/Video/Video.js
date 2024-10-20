@@ -14,9 +14,10 @@ function Video({
   description,
   title,
   index,
+  setVideoRef
 }) {
   const videoRef = useRef(null);
-  const playerRef = useRef(null); 
+
   
   const [playerState, setPlayerState] = useState({
     playing: true,
@@ -30,6 +31,7 @@ function Video({
     videoElement: null,
     seeking: false,
     playedSeconds: 0,
+  
   });
 
   const [note, setNote] = useState({
@@ -38,31 +40,6 @@ function Video({
     description: "description",
     timestamp: "",
   });
-
-  useEffect(() => {
-    const observer = new IntersectionObserver(
-      ([entry]) => {
-        if (entry.isIntersecting) {
-          setPlayerState((prev) => ({ ...prev, playing: true }));
-        } else {
-          setPlayerState((prev) => ({ ...prev, playing: false }));
-        }
-      },
-      { threshold: 0.5 }
-    );
-  
-    const currentVideoRef = videoRef.current; // Will cause bugs if deleted
-    
-    if (currentVideoRef) {
-      observer.observe(currentVideoRef);
-    }
-  
-    return () => {
-      if (currentVideoRef) {
-        observer.unobserve(currentVideoRef);
-      }
-    };
-  }, [videoRef]); 
 
 
 
@@ -73,7 +50,7 @@ function Video({
     const manualNumberInDecimal = parseFloat(e.target.value) / 100;
     console.log("manualNumberInDecimal", manualNumberInDecimal);
     setPlayerState({ ...playerState, playing: false });
-    playerRef.current.seekTo(manualNumberInDecimal, "fraction");
+    videoRef.current.seekTo(manualNumberInDecimal, "fraction");
     setPlayerState((prevPlayerState) => ({
       ...prevPlayerState,
       played: manualNumberInDecimal,
@@ -118,39 +95,35 @@ function Video({
     setNote({ ...note, active: false });
   };
 
+  const onVideoPress = () => {
+    if (videoRef.current.paused) {
+      videoRef.current.play();
+    } else {
+      videoRef.current.pause();
+    }
+  };
 
   const { playing, volume, muted, loop, played, playbackRate } = playerState;
 
   return (
     <div className="video">
-      <div className="video_click" ref={videoRef} onClick={() => handlePlayPause()}>
+      <div className="video_click" onClick={() => handlePlayPause()}>
         {note.active && <Note note={note} handleCloseNote={handleCloseNote} />}
  
-        <ReactPlayer
-          id={"video" + index}
-          ref={playerRef}
-          className="video__player"
-          url={url}
-          playing={playing && !note.active }
-          width={"100%"}
-          height={"100%"}
-          playsinline={true}
-          loop={loop}
-          playbackRate={playbackRate}
-          volume={volume}
-          muted={muted}
-          // onReady={() => console.log("onReady")}
-          // onStart={() => console.log("onStart")}
-          onPlay={handlePlay}
-          onPause={handlePause}
-          // onBuffer={() => setBuffer(true)}
-          // onPlaybackRateChange={handleOnPlaybackRateChange}
-          // onSeek={(e) => console.log("onSeek", e)}
-          // onEnded={handleEnded}
-          // onError={(e) => console.log("onError", e)}
-        
-          // onDuration={handleDuration}
-        />   
+        <video
+        className="player"
+        onClick={onVideoPress}
+        ref={(ref) => {
+          videoRef.current = ref;
+          setVideoRef(ref);
+        }}
+        width={"100%"}
+        height={"100%"}
+        playsInline={true}
+        loop
+        muted
+        src={url}
+      ></video> 
  
       </div>
       <input
