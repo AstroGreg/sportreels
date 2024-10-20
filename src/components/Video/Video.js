@@ -14,10 +14,11 @@ function Video({
   description,
   title,
   index,
-  setVideoRef
+  setVideoRef,
+  handleMuteUnmute,
+  muted,
 }) {
   const videoRef = useRef(null);
-  const [muted, setMuted] = useState(true);
   
 
 
@@ -56,31 +57,23 @@ function Video({
     // setPlayerState({ ...playerState, playing: false });
   };
 
-  const handleMuteUnmute = () => {
-    setMuted(!muted);
+
+
+  const handleTakeNote = () => {
+   
+    handlePause();
+    const timestamp = new Date(100 * 1000).toISOString().slice(14, 19);
+    setNote({
+      ...note,
+      active: true,
+      title,
+      description,
+      timestamp
+    });
   };
-
-
-  // const handleTakeNote = () => {
-  //   console.log(
-  //     "Taking note at: ",
-  //     playerState.playedSeconds,
-  //     title,
-  //     description
-  //   );
-  //   handlePause();
-  //   const timestamp = new Date(playerState.playedSeconds * 1000).toISOString().slice(14, 19);
-  //   setNote({
-  //     ...note,
-  //     active: true,
-  //     title,
-  //     description,
-  //     timestamp
-  //   });
-  // };
-  // const handleCloseNote = () => {
-  //   setNote({ ...note, active: false });
-  // };
+  const handleCloseNote = () => {
+    setNote({ ...note, active: false });
+  };
 
   const onVideoPress = () => {
     if (videoRef.current.paused) {
@@ -95,9 +88,10 @@ function Video({
   return (
     <div className="video">
 
-        {/* {note.active && <Note note={note} handleCloseNote={handleCloseNote} />}
-  */}
+        {note.active && <Note note={note} handleCloseNote={handleCloseNote} />}
+ 
         <video
+        index={index}
         className="player"
         onClick={onVideoPress}
         ref={(ref) => {
@@ -135,7 +129,7 @@ function Video({
         muted={muted}
         handleMuteUnmute={handleMuteUnmute}
         // // playing={playing}
-        // handleTakeNote={handleTakeNote}
+        handleTakeNote={handleTakeNote}
       />
     </div>
   );

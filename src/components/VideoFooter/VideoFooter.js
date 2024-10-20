@@ -36,12 +36,12 @@ function VideoFooter({
           ) : (
             <img
               alt="pic of course"
-              src="https://res.cloudinary.com/ak-124210/image/upload/v1642434078/yjnzwmihmhghxkwnb6n9.png"
+              src="https://www.atletiek.nu/img/basicDesign/athletics.app%20logo_white.png"
             />
           )}
 
           <span className="profile-name">{title}</span>
-          {!displayQuiz ? <button className="signup-cta">Signup</button> : null}
+     
         </div>
         <div className="video-caption">
           {!max ? (

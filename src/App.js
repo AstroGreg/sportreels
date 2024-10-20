@@ -14,6 +14,11 @@ function App() {
 
   const [videos, setVideos] = useState([]);
   const videoRefs = useRef([]);
+  const [muted, setMuted] = useState(true);
+
+  const handleMuteUnmute = () => {
+    setMuted(!muted);
+  };
 
   useEffect(() => {
     setVideos(videoUrls);
@@ -74,7 +79,8 @@ function App() {
                   description={description}
                   index={index}
                   setVideoRef={handleVideoRef(index)}
-                  
+                  handleMuteUnmute={handleMuteUnmute}
+                  muted={muted}
                 />
 
             );

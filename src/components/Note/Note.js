@@ -8,6 +8,7 @@ function Note({note, handleCloseNote}) {
   
   return (
     <div className="note__container">
+      <button className="note__close" onClick={handleCloseNote}> close </button>
       <div className="note__header">
         Take a note @{note.timestamp}
     
