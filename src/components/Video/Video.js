@@ -19,7 +19,43 @@ function Video({
   muted,
 }) {
   const videoRef = useRef(null);
-  
+  const [currentTime, setCurrentTime] = useState(0);
+  const [duration, setDuration] = useState(0);
+
+  const handleLoadedMetadata = () => {
+    if (videoRef.current) {
+      setDuration(videoRef.current.duration);
+    }
+  };
+
+  const handleTimeUpdate = () => {
+    if (videoRef.current) {
+      setCurrentTime(videoRef.current.currentTime);
+    }
+  };
+
+  const handleSkipTo = (e) => {
+    const newTime = (e.target.value / 100) * duration;
+    videoRef.current.currentTime = newTime;
+    setCurrentTime(newTime);
+  };
+
+  useEffect(() => {
+    const video = videoRef.current;
+    if (video) {
+      video.addEventListener('loadedmetadata', handleLoadedMetadata);
+      video.addEventListener('timeupdate', handleTimeUpdate);
+    }
+    return () => {
+      if (video) {
+        video.removeEventListener('loadedmetadata', handleLoadedMetadata);
+        video.removeEventListener('timeupdate', handleTimeUpdate);
+      }
+    };
+  }, []);
+
+  const played = duration ? currentTime / duration : 0;
+
 
 
   const [note, setNote] = useState({
@@ -33,16 +69,6 @@ function Video({
 
   const handlePlayPause = () => {
     // setPlayerState({ ...playerState, playing: !playerState.playing });
-  };
-  const handleSkipTo = (e) => {
-    const manualNumberInDecimal = parseFloat(e.target.value) / 100;
-    console.log("manualNumberInDecimal", manualNumberInDecimal);
-    // setPlayerState({ ...playerState, playing: false });
-    videoRef.current.seekTo(manualNumberInDecimal, "fraction");
-    // setPlayerState((prevPlayerState) => ({
-    //   ...prevPlayerState,
-    //   played: manualNumberInDecimal,
-    // }));
   };
 
 
@@ -106,7 +132,7 @@ function Video({
         src={url}
       ></video> 
  
-      {/* <input
+       <input
         className="videofooter"
         type="range"
         style={{ backgroundSize: `${played * 100}%` }}
@@ -117,14 +143,13 @@ function Video({
         onChange={(e) => {
           handleSkipTo(e);
         }}
-      /> */}
+      /> 
   
           <VideoFooter
             title={title}
             description={description}
           />
       
-
       <VideoSidebar
         muted={muted}
         handleMuteUnmute={handleMuteUnmute}
@@ -136,22 +161,3 @@ function Video({
 }
 
 export default Video;
-
-// {pauseVideo === parseInt(playerState.progress) ? (
-//   <>
-//     <VideoFooter
-//       channel={channel}
-//       description={description}
-//       song={song}
-//     />
-//     {/**/}
-//     <VideoSidebar quizOptions={quizOptions} videoRef={videoRef} />
-//   </>
-// ) : null}
-
-// {!playerState.isPlaying ? (
-//   <>
-//     <VideoFooter channel={channel} description={description} />
-//     <VideoSidebar quizOptions={quizOptions} videoRef={videoRef} />
-//   </>
-// ) : null}
