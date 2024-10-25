@@ -1,12 +1,7 @@
 import React, { useEffect, useRef, useState } from "react";
 import VideoFooter from "../VideoFooter/VideoFooter";
 import VideoSidebar from "../VideoSidebar/VideoSidebar";
-// import useVideoPlayer from "../../hooks/useVideoPlayer";
-import ReactPlayer from "react-player";
 import Note from "../Note/Note";
-// import QuizOptions from "../QuizOptions/QuizOptions";
-// import { QuizReelContext } from "../../contexts/QuizReelContext";
-
 import "./Video.css";
 
 function Video({
@@ -56,8 +51,6 @@ function Video({
 
   const played = duration ? currentTime / duration : 0;
 
-
-
   const [note, setNote] = useState({
     active: false,
     title: "title",
@@ -65,29 +58,9 @@ function Video({
     timestamp: "",
   });
 
-
-
-  const handlePlayPause = () => {
-    // setPlayerState({ ...playerState, playing: !playerState.playing });
-  };
-
-
-
-  const handlePlay = () => {
-    console.log("onPlay");
-    // setPlayerState({ ...playerState, playing: true });
-  };
-
-  const handlePause = () => {
-    // console.log("onPause");
-    // setPlayerState({ ...playerState, playing: false });
-  };
-
-
-
   const handleTakeNote = () => {
    
-    handlePause();
+    videoRef.current.pause();
     const timestamp = new Date(100 * 1000).toISOString().slice(14, 19);
     setNote({
       ...note,
@@ -97,8 +70,10 @@ function Video({
       timestamp
     });
   };
+
   const handleCloseNote = () => {
     setNote({ ...note, active: false });
+    videoRef.current.play();
   };
 
   const onVideoPress = () => {
@@ -109,13 +84,10 @@ function Video({
     }
   };
 
-  // const { playing, volume, muted, loop, played, playbackRate } = playerState;
-
   return (
     <div className="video">
 
         {note.active && <Note note={note} handleCloseNote={handleCloseNote} />}
- 
         <video
         index={index}
         className="player"
@@ -144,18 +116,18 @@ function Video({
           handleSkipTo(e);
         }}
       /> 
-  
-          <VideoFooter
-            title={title}
-            description={description}
-          />
+
+      <VideoFooter
+        title={title}
+        description={description}
+      />
       
       <VideoSidebar
         muted={muted}
         handleMuteUnmute={handleMuteUnmute}
-        // // playing={playing}
         handleTakeNote={handleTakeNote}
       />
+
     </div>
   );
 }
