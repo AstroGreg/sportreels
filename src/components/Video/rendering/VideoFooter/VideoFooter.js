@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import "./VideoFooter.css";
 import TextTruncate from "react-text-truncate"; // recommend
-import QuizOptions from "../QuizOptions/QuizOptions";
+
 
 // import useVideoPlayer from "../../hooks/useVideoPlayer";
 function VideoFooter({
@@ -21,15 +21,7 @@ function VideoFooter({
       }`}
     >
       <div className="videoFooter">
-        <div className="quizOptions">
-          {displayQuiz && hasQuiz ? (
-            <QuizOptions
-              quizOptions={quizOptions}
-              handleQuizOptionSelect={handleQuizOptionSelect}
-            />
-          ) : null}
-          {/* {isOptionSelected ? <QuizOptions quizOptions={quizOptions} handleQuizOptionSelect={handleQuizOptionSelect} />} */}
-        </div>
+ 
         <div className="post-pic">
           {hasQuiz ? (
             <h1>MDQUIZ ICON</h1>

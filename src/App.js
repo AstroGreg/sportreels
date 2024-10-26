@@ -1,9 +1,9 @@
 import React, { useEffect, useRef, useState } from "react";
-import Video from "./components/Video/Video";
+import VideoSection from "./components/Video/rendering/VideoSection";
 import "./App.css";
 import "./App.css";
-import Footer from "./components/BottomNav/Footer";
-import Header from "./components/Header/Header";
+import Footer from "./components/Video/rendering/BottomNav/Footer";
+import Header from "./components/Video/rendering/Header/Header";
 import Sandbox from "./sandbox/index"
 
 
@@ -72,7 +72,7 @@ function App() {
           .map(({url, title, description}, index) => {
             console.log(index)
             return (
-                <Video
+                <VideoSection
                   key={index}
                   url={url}
                   title={title}
