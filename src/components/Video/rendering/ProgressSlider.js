@@ -1,7 +1,7 @@
 import React from "react";
 import "../styling/video.css";
 
-function ProgressSlider({ played, onChange }) {
+function ProgressSlider({ played, handleSkipTo }) {
   return (
     <input
       className="videofooter"
@@ -11,7 +11,9 @@ function ProgressSlider({ played, onChange }) {
       max="100"
       step="any"
       value={played}
-      onChange={onChange}
+      onChange={(e) => {
+        handleSkipTo(e);
+      }}
     />
   );
 }

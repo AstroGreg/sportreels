@@ -1,59 +1,14 @@
-.video {
-  position: relative;
-  width: 100%;
-  height: 100%;
-  scroll-snap-align: start;
-  top: 0;
-}
-.test { 
-  position: relative;
-  top: 50%;
-  left: 0;
-  color: yellow;
-}
-.video__player {
-  position: absolute;
-  top: 0px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  object-fit: cover;
-  width: 100%;
-  border-radius: 20px;
-  height: 100%;
-}
-video[poster] {
-  object-fit: cover;
-} /* or object-fit:fill */
-
-video::-webkit-media-controls-panel {
-  display: none !important;
-  opacity: 1 !important;
-}
-
-@media only screen and (max-width: 600px) {
-  .video__player {
-    object-fit: cover;
-    width: 100%;
-    height: 100%;
-    top: -7vh;
-  }
-}
 input[type="range"] {
-  /* same setting as videocss footer */
   -webkit-appearance: none;
-  /* margin-right: 15px; */
-  /* margin-left: 40px; */
   width: 100%;
-  height: 3px;
+  height: 0.5rm;
   background: rgba(255, 255, 255, 0.6);
-  background-image: linear-gradient(white, white);
+  background-image: linear-gradient(red, red);
+  /* make background transition more smooth */
+  transition: 1ms;
   background-repeat: no-repeat;
-  /* transition-property: background-size;
-  transition-duration: 0.5s;
-  transition-timing-function: linear; */
   position: absolute;
-  bottom: 7vh;
+  bottom: 0;
   left: 0;
   cursor: pointer;
   z-index: 2;
@@ -62,48 +17,10 @@ input[type="range"] {
 /* Input Thumb */
 input[type="range"]::-webkit-slider-thumb {
   -webkit-appearance: none;
-  height: 10px;
-  width: 10px;
-  border-radius: 50%;
-  background-color: white;
-  /* z-index: 1; */
-  /* transition-property: background-size;
-  transition-duration: 0.5s;
-  transition-timing-function: linear; */
+  height: 5px;
+  width: 0px;
+  background-color: red;
 }
 
-input[type="range"]::-moz-range-thumb {
-  -webkit-appearance: none;
-  height: 1px;
-  width: 1px;
-  background-color: #ffc107;
-}
 
-input[type="range"]::-ms-thumb {
-  -webkit-appearance: none;
-  height: 1px;
-  width: 1px;
-  background-color: #ffc107;
-}
 
-/* Input Track */
-input[type="range"]::-webkit-slider-runnable-track {
-  -webkit-appearance: none;
-  box-shadow: none;
-  border: none;
-  background: transparent;
-}
-
-input[type="range"]::-moz-range-track {
-  -webkit-appearance: none;
-  box-shadow: none;
-  border: none;
-  background: transparent;
-}
-
-input[type="range"]::-ms-track {
-  -webkit-appearance: none;
-  box-shadow: none;
-  border: none;
-  background: transparent;
-}

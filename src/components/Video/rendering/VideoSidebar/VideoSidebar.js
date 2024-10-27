@@ -1,32 +1,28 @@
 import React from "react";
-import "./VideoSidebar.css";
-// import useVideoPlayer from "./hooks/useVideoPlayer";
-
 
 function VideoSidebar({ muted, handleMuteUnmute, handleTakeNote }) {
-  // const { handleSkipToTime } = useVideoPlayer(videoRef);
   return (
-    <div className="videoSidebar">
-  
-    
-      <div className="videoSidebar__button" onClick={handleTakeNote}>
-        <div><small><strong>Note</strong></small></div>
+    <div className="absolute  right-0 flex flex-col justify-end h-1/5 text-white top-1/2 bottom-auto">
+      <div
+        className="p-2 mb-2 text-center cursor-pointer bg-opacity-75 hover:bg-opacity-90 transition duration-300 ease-in-out"
+        onClick={handleTakeNote}
+      >
+        <small><strong>Note</strong></small>
       </div>
 
-      <div className="videoSidebar__button" onClick={handleMuteUnmute}>
-        <div><small><strong>{muted ? "Unmute" : "Mute" }</strong></small></div>
+      <div
+        className="p-2 mb-2 text-center cursor-pointer bg-opacity-75 hover:bg-opacity-90 transition duration-300 ease-in-out"
+        onClick={handleMuteUnmute}
+      >
+        <small><strong>{muted ? "Unmute" : "Mute"}</strong></small>
+   
       </div>
-
-      {/* {quizOptions.quizOptions.map((quizOption, index) => (
-        <div
-          className={`videoSidebar__button ${
-            quizOptions.isCorrectAnswer ? "yellow" : "purple"
-          }`}
-          onClick={() => handleSkipToTime(index, quizOptions.optionRedirects)}
-        >
-          {quizOption}
-        </div>
-      ))} */}
+      <div
+        className="p-2 mb-2 text-center cursor-pointer bg-opacity-75 hover:bg-opacity-90 transition duration-300 ease-in-out"
+     
+      >
+        <small><strong>Share</strong></small>
+      </div>
     </div>
   );
 }

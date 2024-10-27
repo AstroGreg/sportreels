@@ -1,21 +1,21 @@
-import React, { useEffect, useRef, useState } from "react";
+import React, { useRef, useState } from "react";
 import VideoFooter from "./VideoFooter/VideoFooter";
 import VideoSidebar from "./VideoSidebar/VideoSidebar";
 import Note from "./Note/Note";
-import "../styling/video.css";
+import BackToMenu from "./BackToMenu";
 import Video from "./Video";
 
 function VideoSection({
   url,
   description,
   title,
+  Isscroll,
   index,
   setVideoRef,
   handleMuteUnmute,
   muted,
 }) {
   const videoRef = useRef(null);
-
   const [note, setNote] = useState({
     active: false,
     title: "title",
@@ -24,8 +24,6 @@ function VideoSection({
   });
 
   const handleTakeNote = () => {
-   
-    videoRef.current.pause();
     const timestamp = new Date(100 * 1000).toISOString().slice(14, 19);
     setNote({
       ...note,
@@ -36,18 +34,20 @@ function VideoSection({
     });
   };
 
-  const handleCloseNote = () => {
-    setNote({ ...note, active: false });
-    videoRef.current.play();
-  };
-
+  const handleCloseNote = () => setNote({ ...note, active: false });
 
   return (
-    <div className="video">
+    <div className="relative w-full h-full snap-start">
       {note.active && <Note note={note} handleCloseNote={handleCloseNote} />}
-      <Video url={url} index={index} setVideoRef={setVideoRef} muted={muted} />
-      <VideoFooter title={title} description={description}/>
-      <VideoSidebar muted={muted} handleMuteUnmute={handleMuteUnmute} handleTakeNote={handleTakeNote}/>
+      <BackToMenu onBack={() => console.log("lol")}  />
+      <Video url={url} Isscroll={Isscroll} index={index} setVideoRef={setVideoRef} muted={muted} />
+      <VideoFooter title={title} description={description} />
+      <VideoSidebar
+        muted={muted}
+        handleMuteUnmute={handleMuteUnmute}
+        handleTakeNote={handleTakeNote}
+      />
+
     </div>
   );
 }

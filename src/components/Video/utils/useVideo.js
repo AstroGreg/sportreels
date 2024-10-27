@@ -3,6 +3,7 @@ import { useCallback, useEffect, useState } from "react";
 export function useVideo(videoRef) {
   const [currentTime, setCurrentTime] = useState(0);
   const [duration, setDuration] = useState(0);
+  const [playedPercentage, setPlayedPercentage] = useState(0);
 
   const handleLoadedMetadata = useCallback(() => {
     if (videoRef.current) {
@@ -11,8 +12,11 @@ export function useVideo(videoRef) {
   }, [videoRef]);
 
   const handleTimeUpdate = useCallback(() => {
+   
     if (videoRef.current) {
-      setCurrentTime(videoRef.current.currentTime);
+      const current = videoRef.current.currentTime;
+      setCurrentTime(current);
+      setPlayedPercentage((current / videoRef.current.duration) * 100);
     }
   }, [videoRef]);
 
@@ -30,5 +34,5 @@ export function useVideo(videoRef) {
     };
   }, [handleLoadedMetadata, handleTimeUpdate, videoRef]);
 
-  return { setCurrentTime, currentTime, duration };
+  return { currentTime, duration, playedPercentage, setCurrentTime };
 }

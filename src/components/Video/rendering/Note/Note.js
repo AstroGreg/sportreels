@@ -1,31 +1,33 @@
 import React, { useState } from "react";
-import "./Note.css";
 import TextTruncate from "react-text-truncate";
 
-
-function Note({note, handleCloseNote}) {
+function Note({ note, handleCloseNote }) {
   const [max, setMax] = useState(false);
-  
+
   return (
-    <div className="note__container">
-      <button className="note__close" onClick={handleCloseNote}> close </button>
-      <div className="note__header">
+    <div className="absolute bottom-0 h-[75%] w-full bg-white z-10 rounded-t-lg p-4">
+      <button className="text-right text-gray-500" onClick={handleCloseNote}>
+        close
+      </button>
+      <div className="flex items-center justify-between font-bold p-4">
         Take a note @{note.timestamp}
-    
       </div>
-      <div className="note__input-container">
+      <div className="mt-4 bg-white rounded-2xl border border-gray-300 p-4 pt-2">
         <input
-          className="note__input note__input-title"
+          className="w-full text-lg font-bold border-none outline-none"
           placeholder="Note title"
         />
 
-        <div className="note__input-footer">
-          <input className="note__input" placeholder="Note text..." />
-          <span className="post-btn">Save</span>
+        <div className="flex items-center mt-2">
+          <input
+            className="w-full border-none outline-none text-base"
+            placeholder="Note text..."
+          />
+          <span className="text-blue-500 font-bold p-4 cursor-pointer">Save</span>
         </div>
       </div>
-      <div className="note__video-info">
-        <div className="note__video-info-header">
+      <div className="p-4">
+        <div className="flex justify-between items-center mb-2">
           <b>{note.title}</b>
           <p>{note.displayQuizTimestampString}</p>
         </div>
@@ -33,7 +35,7 @@ function Note({note, handleCloseNote}) {
         {max ? (
           <div onClick={() => setMax(false)}>
             <span>{note.description}</span>
-            <strong style={{ marginTop: "1rem" }}>view less</strong>
+            <strong className="mt-4 cursor-pointer">view less</strong>
           </div>
         ) : (
           <TextTruncate
@@ -42,14 +44,12 @@ function Note({note, handleCloseNote}) {
             truncateText="…"
             text={note.description}
             textTruncateChild={
-              <span style={{ cursor: "pointer" }} onClick={() => setMax(true)}>
+              <span className="cursor-pointer" onClick={() => setMax(true)}>
                 <strong>view more</strong>
               </span>
             }
           />
         )}
-
-        <p></p>
       </div>
     </div>
   );

@@ -1,13 +1,10 @@
-import React, { useEffect, useRef, useState } from "react";
+import React, { useEffect, useRef, useCallback, useState } from "react";
 import VideoSection from "./components/Video/rendering/VideoSection";
 import "./App.css";
 import "./App.css";
-import Footer from "./components/Video/rendering/BottomNav/Footer";
-import Header from "./components/Video/rendering/Header/Header";
-import Sandbox from "./sandbox/index"
+import Nav from "./components/Video/rendering/Nav";
 
-
-const videoUrls = [ { url: "https://awssportreels.s3.eu-central-1.amazonaws.com/BK+studenten+2023.MP4", title: "BK Studenten" , description:"blablla" } , { url: "https://awssportreels.s3.eu-central-1.amazonaws.com/BK-2024.mov", title: "BK 2024", description:"blablla"  } ]
+const videoUrls = [ { url: "https://awssportreels.s3.eu-central-1.amazonaws.com/BK+studenten+2023.MP4", title: "BK Studenten" , description:"blablla" } , { url: "https://awssportreels.s3.eu-central-1.amazonaws.com/BK-2024.mov", title: "BK 2024", description:"blabllablabllablabllablabllablabllablabllablabllablabllablabllablabllablabllablabllablabllablabllablabllablablla"  } ]
   
 
 function App() {
@@ -15,6 +12,7 @@ function App() {
   const [videos, setVideos] = useState([]);
   const videoRefs = useRef([]);
   const [muted, setMuted] = useState(true);
+  const [Isscroll, setIsScrolling] = useState(0);
 
   const handleMuteUnmute = () => {
     setMuted(!muted);
@@ -62,12 +60,24 @@ function App() {
     videoRefs.current[index] = ref;
   };
 
+  const handleScroll = useCallback(() => {
+    setIsScrolling(1);
+    setTimeout(() => {
+      setIsScrolling(0);
+    }, 1000);
+  }, [])
+
+  // Attach the scroll listener to the div
+  useEffect(() => {
+    videos.current.addEventListener("scroll", handleScroll);
+  }, [handleScroll])
+
+
   return (
     // BEM
 
     <div className="app">
-      <Header />
-      <div className="app__videos">
+      <div className="app__videos" ref={videos}>
         {videos
           .map(({url, title, description}, index) => {
             console.log(index)
@@ -81,12 +91,14 @@ function App() {
                   setVideoRef={handleVideoRef(index)}
                   handleMuteUnmute={handleMuteUnmute}
                   muted={muted}
+                  Isscroll={Isscroll}
                 />
 
             );
           })}
+       
       </div>
-      <Footer />
+
     </div>
   );
 }
