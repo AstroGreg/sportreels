@@ -1,20 +1,15 @@
 import React, { useState } from "react";
-import VideoSidebar from "../VideoSidebar/VideoSidebar";
+
 
 function VideoFooter({
   title,
   description,
-  displayQuiz,
-  hasQuiz,
-  muted,
-  handleMuteUnmute,
-  handleTakeNote,
 }) {
   const [isExpanded, setIsExpanded] = useState(false);
 
   return (
-    <div className="absolute bottom-5 w-full bg-gradient-to-t  px-2">
-      <div className="text-white mt-2 ml-4 mr-10 md:ml-2 md:mr-2">
+    <div className="absolute bottom-0 w-full bg-gradient-to-t px-4 mb-5">
+      <div className="text-white mt-4 md:mt-2 md:ml-2 md:mr-2 relative">
         
         {/* Title Section */}
         <div className="flex items-center mb-3">
@@ -30,7 +25,7 @@ function VideoFooter({
         <div className="transition-all font-medium text-base mb-3">
           <p
             className={`leading-tight ${
-               "max-h-16 overflow-hidden"
+              !isExpanded ? "max-h-16 overflow-hidden" : ""
             }`}
             style={{
               display: "-webkit-box",

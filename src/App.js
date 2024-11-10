@@ -9,6 +9,19 @@ const videoUrls = [ { url: "https://awssportreels.s3.eu-central-1.amazonaws.com/
 
 function App() {
 
+  // Update --vh custom property to the actual viewport height in pixels
+  function setVhProperty() {
+    const vh = window.innerHeight * 0.01;
+    document.documentElement.style.setProperty('--vh', `${vh}px`);
+  }
+
+  // Call the function on initial load
+  setVhProperty();
+
+  // Update the property on resize
+  window.addEventListener('resize', setVhProperty);
+
+
   const [videos, setVideos] = useState([]);
   const videoRefs = useRef([]);
   const [muted, setMuted] = useState(true);
@@ -71,6 +84,18 @@ function App() {
   useEffect(() => {
     videos.current.addEventListener("scroll", handleScroll);
   }, [handleScroll])
+
+
+ // Dynamic viewport height update to handle mobile browser height inconsistencies
+ useEffect(() => {
+  const setViewportHeight = () => {
+    const vh = window.innerHeight * 0.01;
+    document.documentElement.style.setProperty("--vh", `${vh}px`);
+  };
+  setViewportHeight(); // Initial call
+  window.addEventListener("resize", setViewportHeight); // Update on resize
+  return () => window.removeEventListener("resize", setViewportHeight);
+}, []);
 
 
   return (
