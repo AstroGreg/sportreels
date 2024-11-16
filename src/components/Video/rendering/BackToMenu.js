@@ -1,8 +1,10 @@
 // BackToMenu.js
 import React from "react";
 
-function BackToMenu({ onBack }) {
+function BackToMenu({ onBack, Isscroll  }) {
   return (
+    <>
+   {!Isscroll && 
     <div
       className="absolute top-4 left-4 p-2 rounded-full bg-black bg-opacity-50 hover:bg-opacity-70 cursor-pointer z-50"
       onClick={onBack}
@@ -22,6 +24,8 @@ function BackToMenu({ onBack }) {
         />
       </svg>
     </div>
+
+    }       </>
   );
 }
 

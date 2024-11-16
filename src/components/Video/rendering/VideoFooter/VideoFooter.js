@@ -7,9 +7,10 @@ function VideoFooter({
 }) {
   const [isExpanded, setIsExpanded] = useState(false);
 
-  return (
-    <div className="absolute bottom-0 w-full bg-gradient-to-t px-4 mb-5">
-      <div className="text-white mt-4 md:mt-2 md:ml-2 md:mr-2 relative">
+  return (<>
+
+    <div className="absolute bottom-0 w-full px-4 pb-5 bg-gradient-to-t from-black to-transparent ">
+      <div className="text-white mt-4 md:mt-2 md:ml-2 md:mr-2 relative ">
         
         {/* Title Section */}
         <div className="flex items-center mb-3">
@@ -48,6 +49,7 @@ function VideoFooter({
         </div>
       </div>
     </div>
+    </>
   );
 }
 

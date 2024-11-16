@@ -4,7 +4,7 @@ import "./App.css";
 import "./App.css";
 import Nav from "./components/Video/rendering/Nav";
 
-const videoUrls = [ { url: "https://awssportreels.s3.eu-central-1.amazonaws.com/BK+studenten+2023.MP4", title: "BK Studenten" , description:"blablla" } , { url: "https://awssportreels.s3.eu-central-1.amazonaws.com/BK-2024.mov", title: "BK 2024", description:"blabllablabllablabllablabllablabllablabllablabllablabllablabllablabllablabllablabllablabllablabllablabllablablla"  } ]
+const videoUrls = [ { url: "https://awssportreels.s3.eu-central-1.amazonaws.com/BK+studenten+2023.MP4", title: "BK Studenten" , description:"blablla" } , { url: "https://awssportreels.s3.eu-central-1.amazonaws.com/BK-2024.mov", title: "BK 2024", description:"blabllablabllablabllablabllablabllablabllablabllablabllablabllablabllablabllablabllablabllablabllablabllablablla"  } , { url: "https://awssportreels.s3.eu-central-1.amazonaws.com/BK+studenten+2023.MP4" , title: "Sporza 1500m", description:"blab"}]
   
 
 function App() {
@@ -102,6 +102,7 @@ function App() {
     // BEM
 
     <div className="app">
+      
       <div className="app__videos" ref={videos}>
         {videos
           .map(({url, title, description}, index) => {

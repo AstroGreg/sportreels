@@ -38,7 +38,7 @@ html, body {
   height: 100%; /* Set height to 100% of the container */
   width: 100%;
   max-width: 540px;
-  max-height: 960px;
+
   aspect-ratio: 9 / 16;
   overflow-y: scroll;
   scroll-snap-type: y mandatory;
