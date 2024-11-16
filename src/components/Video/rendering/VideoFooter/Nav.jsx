@@ -1,14 +1,8 @@
 // Nav.js
 import React from "react";
-import ProgressSlider from "./ProgressSlider";
-import { useRef } from "react";
-import { useVideo } from "../utils/useVideo";
-import { calculatePlayedPercentage } from "../utils/videoUtils";
+ 
 
-
-function Nav() {
-
-  
+function Nav() {  
   return (
     <div className="absolute max-w-[540px] w-full h-[10%] bottom-0 rounded-bl-xl rounded-br-xl bg-black">
       <div className="flex justify-around items-center h-full">

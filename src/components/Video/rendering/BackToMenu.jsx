@@ -1,7 +1,12 @@
 // BackToMenu.js
 import React from "react";
 
-function BackToMenu({ onBack, Isscroll  }) {
+interface BackToMenuProps {
+  onBack: () => void;
+  Isscroll: boolean;
+}
+
+function BackToMenu({ onBack, Isscroll  } : BackToMenuProps) {
   return (
     <>
    {!Isscroll && 

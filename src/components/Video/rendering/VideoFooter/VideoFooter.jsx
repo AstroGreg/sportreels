@@ -1,10 +1,14 @@
 import React, { useState } from "react";
 
+interface VideoFooterProps {
+  title: string;
+  description: string;
+}
 
 function VideoFooter({
   title,
   description,
-}) {
+} : VideoFooterProps) {
   const [isExpanded, setIsExpanded] = useState(false);
 
   return (<>

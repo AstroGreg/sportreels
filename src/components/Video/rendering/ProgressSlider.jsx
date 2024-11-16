@@ -1,7 +1,12 @@
 import React from "react";
 import "../styling/video.css";
 
-function ProgressSlider({ played, handleSkipTo }) {
+interface ProgressSliderProps {
+  played: number;
+  handleSkipTo: (e: React.ChangeEvent<HTMLInputElement>) => void;
+}
+
+function ProgressSlider({ played, handleSkipTo } : ProgressSliderProps) {
   return (
     <input
       className="videofooter"

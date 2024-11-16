@@ -1,9 +1,10 @@
-import { useCallback, useEffect, useState } from "react";
+import { useCallback, useEffect, useState, MutableRefObject } from "react";
 
-export function useVideo(videoRef) {
-  const [currentTime, setCurrentTime] = useState(0);
-  const [duration, setDuration] = useState(0);
-  const [playedPercentage, setPlayedPercentage] = useState(0);
+
+export function useVideo(videoRef: MutableRefObject<HTMLVideoElement | null>) {
+  const [currentTime, setCurrentTime] = useState<number>(0);
+  const [duration, setDuration] = useState<number>(0);
+  const [playedPercentage, setPlayedPercentage] = useState<number>(0);
 
   const handleLoadedMetadata = useCallback(() => {
     if (videoRef.current) {
@@ -12,7 +13,6 @@ export function useVideo(videoRef) {
   }, [videoRef]);
 
   const handleTimeUpdate = useCallback(() => {
-   
     if (videoRef.current) {
       const current = videoRef.current.currentTime;
       setCurrentTime(current);

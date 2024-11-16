@@ -3,7 +3,14 @@ import { useVideo } from "../utils/useVideo";
 import { calculatePlayedPercentage } from "../utils/videoUtils";
 import ProgressSlider from "./ProgressSlider";
 
-function Video({ url, Isscroll, setVideoRef, muted }) {
+interface VideoProps {
+  url: string;
+  Isscroll: boolean;
+  setVideoRef: (ref: HTMLVideoElement) => void;
+  muted: boolean;
+}
+
+function Video({ url, Isscroll, setVideoRef, muted } : VideoProps) {
   const videoRef = useRef(null);
   const { currentTime, duration, setCurrentTime } = useVideo(videoRef);
 
