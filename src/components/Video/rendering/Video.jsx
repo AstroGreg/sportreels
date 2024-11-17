@@ -1,7 +1,7 @@
-import React, { useRef} from "react";
+import React, { useE} from "react";
 import { useVideo } from "../utils/useVideo";
 import { calculatePlayedPercentage } from "../utils/videoUtils";
-import ProgressSlider from "./ProgressSlider";
+import ProgressSlider from "./ProgressSlider/ProgressSlider";
 
 interface VideoProps {
   url: string;
@@ -10,8 +10,8 @@ interface VideoProps {
   muted: boolean;
 }
 
-function Video({ url, Isscroll, setVideoRef, muted } : VideoProps) {
-  const videoRef = useRef(null);
+function Video({ url, Isscroll, setVideoRef, muted, videoRef} : VideoProps) {
+
   const { currentTime, duration, setCurrentTime } = useVideo(videoRef);
 
   const onVideoPress = () => {
@@ -42,7 +42,7 @@ function Video({ url, Isscroll, setVideoRef, muted } : VideoProps) {
           videoRef.current = ref;
           setVideoRef(ref);
         }}
-        className="absolute top-0 w-full h-full object-cover rounded-lg"
+        className="absolute top-0 w-full h-full object-cover rounded-lg  z-0"
         playsInline
         loop
         muted={muted}

@@ -8,12 +8,13 @@ interface VideoFooterProps {
 function VideoFooter({
   title,
   description,
+  handleShowResults, 
 } : VideoFooterProps) {
   const [isExpanded, setIsExpanded] = useState(false);
 
   return (<>
 
-    <div className="absolute bottom-0 w-full px-4 pb-5 bg-gradient-to-t from-black to-transparent ">
+    <div className="absolute bottom-0 w-full px-4 pb-5 bg-gradient-to-t from-black to-transparent z-5">
       <div className="text-white mt-4 md:mt-2 md:ml-2 md:mr-2 relative ">
         
         {/* Title Section */}
@@ -47,7 +48,7 @@ function VideoFooter({
         {/* Toggle Button */}
         <div
           className="cursor-pointer font-semibold inline-block"
-          onClick={() => setIsExpanded(!isExpanded)}
+          onClick={handleShowResults}
         >
           <strong>Show results</strong>
         </div>

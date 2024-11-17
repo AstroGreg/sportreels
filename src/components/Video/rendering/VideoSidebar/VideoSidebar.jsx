@@ -80,7 +80,7 @@ function VideoSidebar({ muted, handleMuteUnmute, handleTakeNote }) {
 
       {/* Copied Message */}
       {copied && (
-        <div className="absolute bottom-12 right-2 p-2 bg-green-600 text-sm rounded-md shadow-md z-1">
+        <div className="absolute bottom-12 right-2 p-2 bg-blue-600 text-sm rounded-md shadow-md z-1">
           Link copied!
         </div>
       )}

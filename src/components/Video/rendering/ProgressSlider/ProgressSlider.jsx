@@ -1,5 +1,5 @@
 import React from "react";
-import "../styling/video.css";
+import "./progressSlider.css";
 
 interface ProgressSliderProps {
   played: number;
