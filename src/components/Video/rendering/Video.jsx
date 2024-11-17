@@ -40,9 +40,9 @@ function Video({ url, Isscroll, setVideoRef, muted, videoRef} : VideoProps) {
         onClick={onVideoPress}
         ref={(ref) => {
           videoRef.current = ref;
-          setVideoRef(ref);
+          setVideoRef(ref); 
         }}
-        className="absolute top-0 w-full h-full object-cover rounded-lg  z-0"
+        className="absolute top-0 w-full h-full object-cover  z-0"
         playsInline
         loop
         muted={muted}

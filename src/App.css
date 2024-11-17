@@ -42,7 +42,7 @@ html, body {
   aspect-ratio: 9 / 16;
   overflow-y: scroll;
   scroll-snap-type: y mandatory;
-  border-radius: 20px;
+
 }
 /* Hide scrollbar for Chrome, Safari and Opera */
 .app__videos::-webkit-scrollbar {

@@ -1,14 +1,17 @@
 // Nav.js
 import React from "react";
  
+interface NavProps {
+  handlePageSwitch: (page: string) => void;
+}
 
-function Nav() {  
+function Nav( {handlePageSwitch}: {handlePageSwitch: (page: string) => void} ) {  
   return (
-    <nav className="absolute max-w-[540px] w-full h-[10%] bottom-0 rounded-bl-xl rounded-br-xl bg-white">
+    <nav className="relative max-w-[540px] w-full h-[10vh] bottom-0 rounded-bl-xl rounded-br-xl bg-white">
       <div className="flex justify-around items-center h-full">
         {/* Home Button */}
         <button
-          onClick={() => alert("Home Clicked")}
+          onClick={() => handlePageSwitch("Home")}
           className="text-slate-700 flex flex-col items-center"
         >
           <svg
@@ -30,7 +33,7 @@ function Nav() {
 
         {/* Search Button */}
         <button
-          onClick={() => alert("Search Clicked")}
+          onClick={ () => handlePageSwitch("Search")}
           className="text-slate-700 flex flex-col items-center"
         >
         <svg
@@ -52,7 +55,7 @@ function Nav() {
 
         {/* Profile Button */}
         <button
-          onClick={() => alert("Profile Clicked")}
+          onClick={() => handlePageSwitch("Profile")}
           className="text-slate-700 flex flex-col items-center"
         >
           <svg
@@ -74,7 +77,7 @@ function Nav() {
 
         {/* Additional Menu Item */}
         <button
-          onClick={() => alert("Menu Item Clicked")}
+          onClick={() => handlePageSwitch("Menu")}
           className="text-slate-700 flex flex-col items-center"
         >
           <svg

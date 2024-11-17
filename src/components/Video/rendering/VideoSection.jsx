@@ -1,7 +1,7 @@
 import React,  {useState, useRef, useEffect} from "react";
 import VideoFooter from "./VideoFooter/VideoFooter";
 import VideoSidebar from "./VideoSidebar/VideoSidebar";
-import Nav from "./VideoFooter/Nav";
+import Nav from "../../Nav/Nav";
 import AthleticsResults from "./Results/results";
 import BackToMenu from "./BackToMenu";
 import Video from "./Video";
@@ -152,7 +152,7 @@ function VideoSection({
         handleCloseResults={handleCloseResults}
       /> }
   
-    <div className={`relative w-full h-[90%] snap-start ${
+    <div className={`relative w-full h-full snap-start ${
       showResulsWindow.active ? "hidden absolute" : ""
     }`}>
     <BackToMenu onBack={() => console.log("back")} Isscroll={Isscroll} />
@@ -165,10 +165,7 @@ function VideoSection({
       />
     </div>
 
-    <div className="h-[10%]">
-       <Nav />
-    </div>
-  
+   
      
     
     </>
