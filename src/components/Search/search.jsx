@@ -54,7 +54,7 @@ const Search = ({Nav} : {Nav: React.ReactNode}) => {
         <div className="h-[60vh] md:h-[75vh] overflow-y-auto">
           {filteredResults.length > 0 ? (
             <div className="relative">
-              <table className="min-w-full table-auto border-collapse">
+              <table className="min-w-full border-collapse">
                 <thead className="sticky top-0 bg-blue-600 text-white">
                   <tr>
                     <th className="py-3 px-4 text-left text-sm">Event</th>
@@ -82,7 +82,7 @@ const Search = ({Nav} : {Nav: React.ReactNode}) => {
               </table>
             </div>
           ) : (
-            <div className="overflow-x-auto pt-5">
+            <div className="overflow-x-auto pt-5 h-full">
               <img src={Elie} alt="foto" className="w-full h-full object-cover" />
             </div>
           )}

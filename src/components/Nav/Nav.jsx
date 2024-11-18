@@ -55,24 +55,14 @@ function Nav( {handlePageSwitch}: {handlePageSwitch: (page: string) => void} ) {
 
         {/* Profile Button */}
         <button
-          onClick={() => handlePageSwitch("Profile")}
+          onClick={() => handlePageSwitch("Upload")}
           className="text-slate-700 flex flex-col items-center"
         >
-          <svg
-            xmlns="http://www.w3.org/2000/svg"
-            className="w-6 h-6 mb-1"
-            fill="none"
-            viewBox="0 0 24 24"
-            stroke="currentColor"
-          >
-            <path
-              strokeLinecap="round"
-              strokeLinejoin="round"
-              strokeWidth="2"
-              d="M12 12c2.7 0 5.4-1.5 5.4-5.4S14.7 1 12 1 6.6 2.7 6.6 6.6 9.3 12 12 12zm0 0c-3 0-7 1.5-7 4.2v2.1c0 1.2 1 2.1 2.1 2.1h9.8c1.2 0 2.1-1 2.1-2.1v-2.1c0-2.7-4-4.2-7-4.2z"
-            />
-          </svg>
-          Profile
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" class="w-6 h-6 mb-1">
+        <path d="M12 2c.41 0 .75.34.75.75v12.69l3.5-3.5a.75.75 0 1 1 1.06 1.06l-5 5a.75.75 0 0 1-1.06 0l-5-5a.75.75 0 1 1 1.06-1.06l3.5 3.5V2.75c0-.41.34-.75.75-.75zM4 18.75A.75.75 0 0 1 4.75 18h14.5a.75.75 0 0 1 0 1.5H4.75a.75.75 0 0 1-.75-.75z" />
+      </svg>
+
+          Upload
         </button>
 
         {/* Additional Menu Item */}

@@ -1,7 +1,9 @@
 import React, { useEffect, useRef, useCallback, useState } from "react";
-import Home from "./components/Home/Home";
+import Home from "./components/Home/HomeContainer";
 import Nav from "./components/Nav/Nav";
-import Search from "./components/Search/search";
+import Search from "./components/Search/SearchContainer";
+import Upload from "./components/Upload/UploadContainer";
+import Menu from "./components/Menu/MenuContainer";
 
 
 function App() {
@@ -26,6 +28,8 @@ function App() {
     <div className="app">
       {currentPage === "Home" && <Home  Nav={<Nav handlePageSwitch={handlePageSwitch}/>} />}
       {currentPage === "Search" && <Search  Nav={<Nav handlePageSwitch={handlePageSwitch}/>} />}
+      {currentPage === "Upload" && <Upload  Nav={<Nav handlePageSwitch={handlePageSwitch}/>} />}
+      {currentPage === "Menu" && <Menu  Nav={<Nav handlePageSwitch={handlePageSwitch}/>} />}
     </div>
   );
 }

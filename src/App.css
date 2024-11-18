@@ -64,3 +64,20 @@ html, body {
     width: 100vw;
   } */
 }
+
+input, button {
+  outline: none;
+}
+
+button {
+  cursor: pointer;
+}
+
+ul {
+  list-style: none;
+  padding: 0;
+}
+
+ul li {
+  border-bottom: 1px solid #e5e7eb;
+}
