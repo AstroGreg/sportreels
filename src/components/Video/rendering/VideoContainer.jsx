@@ -4,9 +4,10 @@ import "../../../App.css";
 
 interface VideoContainerProps {
   videoUrls: { url: string; title: string; description: string }[];
+  handleBackToMenu: () => void;
 }
 
-function VideoContainer({ videoUrls }: VideoContainerProps) {
+function VideoContainer({ videoUrls, handleBackToMenu }: VideoContainerProps) {
   // Set up a ref for the scrollable container
   const containerRef = useRef(null);
 
@@ -99,6 +100,7 @@ function VideoContainer({ videoUrls }: VideoContainerProps) {
           index={index}
           setVideoRef={handleVideoRef(index)}
           handleMuteUnmute={handleMuteUnmute}
+          handleBackToMenu={handleBackToMenu}
           muted={muted}
           Isscroll={isScrolling}
         />

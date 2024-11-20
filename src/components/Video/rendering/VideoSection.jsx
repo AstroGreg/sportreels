@@ -14,6 +14,7 @@ interface VideoSectionProps {
   index: number;
   setVideoRef: (ref: HTMLVideoElement) => void;
   handleMuteUnmute: () => void;
+  handleBackToMenu: () => void;
   muted: boolean;
 }
 
@@ -25,6 +26,7 @@ function VideoSection({
   index,
   setVideoRef,
   handleMuteUnmute,
+  handleBackToMenu,
   muted,
 } : VideoSectionProps) {
 
@@ -155,7 +157,7 @@ function VideoSection({
     <div className={`relative w-full h-full snap-start ${
       showResulsWindow.active ? "hidden absolute" : ""
     }`}>
-    <BackToMenu onBack={() => console.log("back")} Isscroll={Isscroll} />
+    { handleBackToMenu && <BackToMenu onBack={handleBackToMenu} Isscroll={Isscroll} />}
   
     <Video url={url} Isscroll={Isscroll} index={index} setVideoRef={setVideoRef} muted={muted} videoRef={videoRef}/> 
       <VideoFooter title={title} description={description} handleShowResults={handleShowResults} />

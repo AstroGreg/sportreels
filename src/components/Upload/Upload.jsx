@@ -1,21 +1,34 @@
 import React, { useState } from "react";
+import { AiOutlineVideoCamera } from "react-icons/ai";
+import { FaCheckCircle, FaTimesCircle } from "react-icons/fa";
+import Elie from "../fotos/Elie.jpeg"; // Background image
 
 const competitions = [
   { id: 1, name: "BK Studenten" },
   { id: 2, name: "Vlaams Kampioenschap" },
   { id: 3, name: "Memorial Van Damme" },
 ]; // Mock competition list
-interface NavProps {
-  handlePageSwitch: (page: string) => void;
-}
 
-const Upload = ( ) => {
+const events = [
+  "400m", "200m", "High Jump", "100m", "Long Jump"
+]; // Mock event list
+
+const heats = [
+  "FINAL", "Heat 1", "Heat 2", "Heat 3", "Semi-Final"
+]; // Mock heats
+
+const Upload = () => {
   const [video, setVideo] = useState(null);
   const [competitionQuery, setCompetitionQuery] = useState("");
   const [filteredCompetitions, setFilteredCompetitions] = useState(competitions);
   const [selectedCompetition, setSelectedCompetition] = useState(null);
   const [newCompetitionName, setNewCompetitionName] = useState("");
   const [createMode, setCreateMode] = useState(false);
+  const [selectedEvent, setSelectedEvent] = useState("");
+  const [selectedHeat, setSelectedHeat] = useState("");
+  const [isLoading, setIsLoading] = useState(false);
+  const [uploadStatus, setUploadStatus] = useState(null); // 'success' or 'failed'
+  const [currentStep, setCurrentStep] = useState(1); // Step control
 
   // Handle video upload
   const handleVideoUpload = (e) => {
@@ -50,111 +63,262 @@ const Upload = ( ) => {
       competitions.push(newCompetition); // Ideally, update the database here
       setSelectedCompetition(newCompetition);
       setCreateMode(false);
+      setCurrentStep(3); // Go to the next step (event and heat selection)
     }
   };
 
-  return (
-    <div className="p-6 bg-gray-100  flex flex-col items-center">
-      <h1 className="text-2xl font-bold text-gray-800 mb-6">Upload Video</h1>
+  // Handle event and heat selection
+  const handleEventSelection = (e) => {
+    setSelectedEvent(e.target.value);
+  };
 
-      {/* Video Upload Section */}
-      <div className="mb-6 w-full max-w-md">
-        <label className="block text-gray-700 font-medium mb-2">Upload Video:</label>
-        <input
-          type="file"
-          accept="video/*"
-          onChange={handleVideoUpload}
-          className="border border-gray-300 p-2 w-full"
-        />
-        {video && <p className="text-sm text-green-600 mt-2">Uploaded: {video.name}</p>}
+  const handleHeatSelection = (e) => {
+    setSelectedHeat(e.target.value);
+  };
+
+  // Start uploading process
+  const handleUpload = () => {
+    setIsLoading(true);
+    setTimeout(() => {
+      setIsLoading(false);
+      setUploadStatus("success"); // Change to "failed" to simulate a failure
+    }, 5000); // Simulate a 5-second upload time
+  };
+
+  // Reset all states for a fresh start
+  const resetUploadFlow = () => {
+    setVideo(null);
+    setCompetitionQuery("");
+    setFilteredCompetitions(competitions);
+    setSelectedCompetition(null);
+    setNewCompetitionName("");
+    setCreateMode(false);
+    setSelectedEvent("");
+    setSelectedHeat("");
+    setIsLoading(false);
+    setUploadStatus(null);
+    setCurrentStep(1); // Go back to the first step
+  };
+
+  // Render a success or failure screen after upload
+  const renderUploadResult = () => {
+    if (uploadStatus === "success") {
+      return (
+        <div className="flex flex-col items-center text-white">
+          <FaCheckCircle className="text-green-500 text-5xl" />
+          <p className="mt-4 text-lg text-green-600">Upload Successful!</p>
+          <button
+            className="mt-4 px-6 py-2 bg-blue-600 text-white rounded"
+            onClick={() => resetUploadFlow()} // Reset the upload flow
+          >
+            Go to Upload Again
+          </button>
+        </div>
+      );
+    } else {
+      return (
+        <div className="flex flex-col items-center text-white">
+          <FaTimesCircle className="text-red-500 text-5xl" />
+          <p className="mt-4 text-lg text-red-600">Upload Failed</p>
+          <button
+            className="mt-4 px-6 py-2 bg-blue-600 text-white rounded"
+            onClick={() => setUploadStatus(null)} // Reset status and try again
+          >
+            Retry
+          </button>
+        </div>
+      );
+    }
+  };
+
+  // Render Preview screen
+  const renderPreviewScreen = () => {
+    return (
+      <div className="flex flex-col items-center text-gray-700">
+        <h2 className="text-3xl font-bold mb-4">Preview Your Upload</h2>
+        <p>Video: {video ? video.name : "No video uploaded"}</p>
+        <p>Competition: {selectedCompetition ? selectedCompetition.name : "No competition selected"}</p>
+        <p>Event: {selectedEvent || "No event selected"}</p>
+        <p>Heat: {selectedHeat || "No heat selected"}</p>
+        <button
+          onClick={handleUpload}
+          className="mt-4 px-6 py-2 bg-blue-600 text-white rounded"
+        >
+          Confirm and Upload
+        </button>
+        <button
+          className="mt-2 px-6 py-2 bg-gray-600 text-white rounded"
+          onClick={() => setCurrentStep(2)} // Go back to competition selection
+        >
+          Edit Selection
+        </button>
       </div>
+    );
+  };
 
-      {/* Competition Selection Section */}
-      <div className="w-full max-w-md">
-        <label className="block text-gray-700 font-medium mb-2">Select Competition:</label>
+  const renderCompetitionSelectionScreen = () => {
+    return (
+      <div className="flex flex-col items-center text-black">
+        <h2 className="text-3xl font-bold mb-4">Select Competition</h2>
         <input
           type="text"
           value={competitionQuery}
           onChange={handleCompetitionSearch}
-          placeholder="Search for a competition"
-          className="border border-gray-300 p-2 w-full mb-2"
+          placeholder="Search for competition"
+          className="mb-4 border p-2 rounded text-black"
         />
-
-        {/* Filtered Results */}
-        {!createMode && filteredCompetitions.length > 0 && (
-          <ul className="border border-gray-300 bg-white max-h-40 overflow-y-auto">
-            {filteredCompetitions.map((comp) => (
-              <li
-                key={comp.id}
-                className={`p-2 cursor-pointer hover:bg-blue-100 ${
-                  selectedCompetition?.id === comp.id ? "bg-blue-200" : ""
-                }`}
-                onClick={() => setSelectedCompetition(comp)}
-              >
-                {comp.name}
-              </li>
-            ))}
-          </ul>
-        )}
-
-        {/* No Matches Found */}
-        {!createMode && filteredCompetitions.length === 0 && (
-          <div className="text-sm text-gray-600 mt-2">
-            No matches found.{" "}
+        <ul className="w-full">
+          {filteredCompetitions.map((comp) => (
+            <li
+              key={comp.id}
+              className={`p-2 cursor-pointer hover:bg-blue-100 ${
+                selectedCompetition?.id === comp.id ? "bg-blue-200" : ""
+              }`}
+              onClick={() => setSelectedCompetition(comp)}
+            >
+              {comp.name}
+            </li>
+          ))}
+        </ul>
+        {filteredCompetitions.length === 0 && !createMode && (
+          <div>
+            <p className="mt-4">Competition not found? <strong>Not listed?</strong></p>
             <button
-              className="text-blue-600 underline"
+              className="mt-4 text-blue-500"
               onClick={() => setCreateMode(true)}
             >
-              Create a new competition
+              Add New Competition
             </button>
           </div>
         )}
-
-        {/* Create New Competition */}
         {createMode && (
-          <div className="mt-4">
-            <label className="block text-gray-700 font-medium mb-2">
-              Create New Competition:
-            </label>
+          <div>
             <input
               type="text"
               value={newCompetitionName}
               onChange={(e) => setNewCompetitionName(e.target.value)}
               placeholder="Enter competition name"
-              className="border border-gray-300 p-2 w-full"
+              className="mb-4 border p-2 rounded text-black"
             />
             <button
-              className="mt-2 px-4 py-2 bg-blue-500 text-white rounded"
               onClick={handleCreateCompetition}
+              className="mt-4 px-6 py-2 bg-blue-600 text-white rounded"
             >
               Save Competition
             </button>
-            <button
-              className="mt-2 ml-4 px-4 py-2 bg-gray-300 rounded"
-              onClick={() => setCreateMode(false)}
-            >
-              Cancel
-            </button>
           </div>
+        )}
+        {selectedCompetition && (
+          <button
+            className="mt-4 px-6 py-2 bg-blue-600 text-white rounded"
+            onClick={() => setCurrentStep(3)} // Next step: select event and heat
+          >
+            Next: Select Event and Heat
+          </button>
         )}
       </div>
+    );
+  };
 
-      {/* Summary */}
-      <div className="mt-6">
-        {video && selectedCompetition && (
-          <div className="p-4 bg-green-100 border border-green-500 rounded">
-            <h2 className="font-bold text-green-800">Summary</h2>
-            <p>
-              <strong>Video:</strong> {video.name}
-            </p>
-            <p>
-              <strong>Competition:</strong> {selectedCompetition.name}
-            </p>
-          </div>
-        )}
+  const renderLoadingScreen = () => {
+    return (
+      <div className="flex justify-center items-center text-gray-700">
+        <div className="spinner-border animate-spin"></div>
+        <p>Uploading...</p>
+      </div>
+    );
+  };
+
+  const renderEventAndHeatSelectionScreen = () => {
+    return (
+      <div className="flex flex-col items-center text-white">
+        <h2 className="text-3xl font-bold mb-4">Select Event and Heat</h2>
+        
+        <select
+          value={selectedEvent}
+          onChange={handleEventSelection}
+          className="mb-4 border p-2 rounded text-black"
+        >
+          <option value="">Select Event</option>
+          {events.map((event, index) => (
+            <option key={index} value={event}>
+              {event}
+            </option>
+          ))}
+        </select>
+
+        <select
+          value={selectedHeat}
+          onChange={handleHeatSelection}
+          className="mb-4 border p-2 rounded text-black"
+        >
+          <option value="">Select Heat</option>
+          {heats.map((heat, index) => (
+            <option key={index} value={heat}>
+              {heat}
+            </option>
+          ))}
+        </select>
+
+        <button
+          onClick={() => setCurrentStep(4)} // Go to preview step
+          className="mt-4 px-6 py-2 bg-blue-600 text-white rounded"
+        >
+          Next: Preview
+        </button>
+      </div>
+    );
+  };
+
+  const renderContent = () => {
+    if (isLoading) {
+      return renderLoadingScreen();
+    }
+    if (uploadStatus) {
+      return renderUploadResult();
+    }
+
+    if (currentStep === 1) {
+      return (
+        <div className="flex flex-col items-center">
+          <AiOutlineVideoCamera className="text-5xl mb-4" />
+          <input type="file" accept="video/*" onChange={handleVideoUpload} />
+          {video && <p className="mt-4">Video: {video.name}</p>}
+          <button
+            onClick={() => setCurrentStep(2)}
+            className="mt-4 px-6 py-2 bg-blue-600 text-white rounded"
+            disabled={!video} // Disable button until a video is uploaded
+          >
+            Next: Select Competition
+          </button>
+        </div>
+      );
+    }
+
+    if (currentStep === 2) {
+      return renderCompetitionSelectionScreen();
+    }
+
+    if (currentStep === 3) {
+      return renderEventAndHeatSelectionScreen();
+    }
+
+    if (currentStep === 4) {
+      return renderPreviewScreen();
+    }
+
+    return null;
+  };
+
+  return (
+    <div
+      className="flex justify-center items-center h-full bg-cover bg-center"
+      style={{ backgroundImage: `url(${Elie})` }}
+    >
+      <div className="w-full max-w-md p-6 bg-white rounded-lg shadow-lg">
+        {renderContent()}
       </div>
     </div>
-
   );
 };
 
