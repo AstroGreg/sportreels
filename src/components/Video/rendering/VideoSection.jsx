@@ -3,7 +3,7 @@ import VideoFooter from "./VideoFooter/VideoFooter";
 import VideoSidebar from "./VideoSidebar/VideoSidebar";
 import Nav from "../../Nav/Nav";
 import AthleticsResults from "./Results/results";
-import BackToMenu from "./BackToMenu";
+import BackIcon from "./BackIcon";
 import Video from "./Video";
 
 interface VideoSectionProps {
@@ -157,7 +157,7 @@ function VideoSection({
     <div className={`relative w-full h-full snap-start ${
       showResulsWindow.active ? "hidden absolute" : ""
     }`}>
-    { handleBackToMenu && <BackToMenu onBack={handleBackToMenu} Isscroll={Isscroll} />}
+    { handleBackToMenu && <BackIcon onBack={handleBackToMenu} Isscroll={Isscroll} />}
   
     <Video url={url} Isscroll={Isscroll} index={index} setVideoRef={setVideoRef} muted={muted} videoRef={videoRef}/> 
       <VideoFooter title={title} description={description} handleShowResults={handleShowResults} />

@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { AiOutlineVideoCamera } from "react-icons/ai";
 import { FaCheckCircle, FaTimesCircle } from "react-icons/fa";
-import Elie from "../fotos/Elie.jpeg"; // Background image
+import Elie from "../../fotos/Elie.jpeg"; // Background image
 
 const competitions = [
   { id: 1, name: "BK Studenten" },

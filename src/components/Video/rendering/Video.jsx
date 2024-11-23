@@ -34,7 +34,6 @@ function Video({ url, Isscroll, setVideoRef, muted, videoRef} : VideoProps) {
 
   return (
     <>
-    
       {!Isscroll && <ProgressSlider played={played} handleSkipTo={handleSkipTo} /> }
       <video
         onClick={onVideoPress}

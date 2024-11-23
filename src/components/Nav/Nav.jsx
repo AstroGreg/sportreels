@@ -1,17 +1,17 @@
 // Nav.js
+// In Header.tsx
+import { Link } from "react-router-dom";
 import React from "react";
  
-interface NavProps {
-  handlePageSwitch: (page: string) => void;
-}
 
-function Nav( {handlePageSwitch}: {handlePageSwitch: (page: string) => void} ) {  
+
+function Nav(  ) {  
   return (
     <nav className="relative max-w-[540px] w-full h-[10vh] bottom-0 rounded-bl-xl rounded-br-xl bg-white">
       <div className="flex justify-around items-center h-full">
         {/* Home Button */}
-        <button
-          onClick={() => handlePageSwitch("Home")}
+        <Link 
+          to="/"
           className="text-slate-700 flex flex-col items-center"
         >
           <svg
@@ -29,11 +29,11 @@ function Nav( {handlePageSwitch}: {handlePageSwitch: (page: string) => void} ) {
             />
           </svg>
           Home
-        </button>
+        </Link>
 
         {/* Search Button */}
-        <button
-          onClick={ () => handlePageSwitch("Search")}
+        <Link
+          to="/Search"
           className="text-slate-700 flex flex-col items-center"
         >
         <svg
@@ -51,11 +51,9 @@ function Nav( {handlePageSwitch}: {handlePageSwitch: (page: string) => void} ) {
     />
   </svg>
           Search
-        </button>
-
-        {/* Profile Button */}
-        <button
-          onClick={() => handlePageSwitch("Upload")}
+        </Link>
+        <Link
+          to="/Upload"
           className="text-slate-700 flex flex-col items-center"
         >
         <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" class="w-6 h-6 mb-1">
@@ -63,11 +61,11 @@ function Nav( {handlePageSwitch}: {handlePageSwitch: (page: string) => void} ) {
       </svg>
 
           Upload
-        </button>
+        </Link>
 
         {/* Additional Menu Item */}
-        <button
-          onClick={() => handlePageSwitch("Menu")}
+        <Link
+          to="/Menu"
           className="text-slate-700 flex flex-col items-center"
         >
           <svg
@@ -85,7 +83,7 @@ function Nav( {handlePageSwitch}: {handlePageSwitch: (page: string) => void} ) {
             />
           </svg>
           Menu
-        </button>
+        </Link>
       </div>
     </nav>
   );

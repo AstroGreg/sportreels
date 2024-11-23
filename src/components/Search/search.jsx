@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import "../../App.css";
 import { AiOutlineCalendar } from "react-icons/ai";
 import VideoContainer from "../Video/rendering/VideoContainer";
-import Elie from "../fotos/Elie.jpeg";
+import Elie from "../../fotos/Elie.jpeg";
 
 const results = [
   { event: "1500m", competition: "BK Studenten", date: "2024-02-27", location: "Gent", video: "dummy-video1.mp4" },

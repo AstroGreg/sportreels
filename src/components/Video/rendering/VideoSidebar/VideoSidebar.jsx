@@ -3,7 +3,7 @@ import { default as mute} from "../../icons/mute.svg";
 import { default as unmute} from "../../icons/unmute.svg";
 import { default as share} from "../../icons/share.svg";
 
-function VideoSidebar({ muted, handleMuteUnmute, handleTakeNote }) {
+function VideoSidebar({ muted, handleMuteUnmute }) {
   const [copied, setCopied] = useState(false);
 
   const handleShare = () => {

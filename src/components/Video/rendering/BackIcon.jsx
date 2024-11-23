@@ -1,12 +1,12 @@
 // BackToMenu.js
 import React from "react";
 
-interface BackToMenuProps {
+interface BackIconProps {
   onBack: () => void;
   Isscroll: boolean;
 }
 
-function BackToMenu({ onBack, Isscroll  } : BackToMenuProps) {
+function BackIcon({ onBack, Isscroll  } : BackIconProps) {
   return (
     <>
    {!Isscroll && 
@@ -34,4 +34,4 @@ function BackToMenu({ onBack, Isscroll  } : BackToMenuProps) {
   );
 }
 
-export default BackToMenu;
+export default BackIcon;
