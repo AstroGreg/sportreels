@@ -10,7 +10,7 @@ interface VideoContainerProps {
 function VideoContainer({ videoUrls, handleBackToMenu }: VideoContainerProps) {
   // Set up a ref for the scrollable container
   const containerRef = useRef(null);
-
+  const [resultsDisplayed, setResultsDisplayed] = useState(false);
   // Update --vh custom property to the actual viewport height in pixels
   function setVhProperty() {
     const vh = window.innerHeight * 0.01;
@@ -90,7 +90,7 @@ function VideoContainer({ videoUrls, handleBackToMenu }: VideoContainerProps) {
   }, [handleScroll]);
 
   return (
-    <div className="app__videos" ref={containerRef}>
+    <div className={`${!resultsDisplayed && "app__videos"}`}ref={containerRef}>
       {videos.map(({ url, title, description }, index) => (
         <VideoSection
           key={index}
@@ -103,6 +103,8 @@ function VideoContainer({ videoUrls, handleBackToMenu }: VideoContainerProps) {
           handleBackToMenu={handleBackToMenu}
           muted={muted}
           Isscroll={isScrolling}
+          resultsDisplayed={resultsDisplayed}
+          setResultsDisplayed={setResultsDisplayed}
         />
       ))}
     </div>

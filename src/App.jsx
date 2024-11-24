@@ -18,9 +18,11 @@ function App() {
   window.addEventListener("resize", setViewportHeight); // Update on resize
   return () => window.removeEventListener("resize", setViewportHeight);
 }, []);
+
   return (
-   <Router className="app">
-     <div className="flex flex-col items-center h-full w-full bg-purple-100">
+   <Router>
+    <div className="app">
+     <div className="flex flex-col items-center h-full w-full">
       <div className="bg-gray-50 w-full overflow-y-auto" style={{ height: "90vh", maxWidth: "540px" }}>
         <Routes >
           <Route path="/" element={<Home />} />
@@ -33,6 +35,7 @@ function App() {
          <Nav />
       </div>
      </div>
+    </div>
    </Router>
   );
 }

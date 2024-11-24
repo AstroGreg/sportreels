@@ -1,8 +1,7 @@
 import React,  {useState, useRef, useEffect} from "react";
 import VideoFooter from "./VideoFooter/VideoFooter";
 import VideoSidebar from "./VideoSidebar/VideoSidebar";
-import Nav from "../../Nav/Nav";
-import AthleticsResults from "./Results/results";
+import Results from "./Results/results";
 import BackIcon from "./BackIcon";
 import Video from "./Video";
 
@@ -16,6 +15,8 @@ interface VideoSectionProps {
   handleMuteUnmute: () => void;
   handleBackToMenu: () => void;
   muted: boolean;
+  resultsDisplayed: boolean;
+  setResultsDisplayed: (value: boolean) => void;
 }
 
 function VideoSection({
@@ -28,6 +29,8 @@ function VideoSection({
   handleMuteUnmute,
   handleBackToMenu,
   muted,
+  resultsDisplayed,
+  setResultsDisplayed,
 } : VideoSectionProps) {
 
   const videoRef = useRef(null);
@@ -40,6 +43,7 @@ function VideoSection({
   });
 
   const handleShowResults = () => {
+    setResultsDisplayed(true);
     const timestamp = new Date(100 * 1000).toISOString().slice(14, 19);
     setshowResulsWindow({
       ...results,
@@ -51,6 +55,7 @@ function VideoSection({
   };
 
   const handleCloseResults = () => {
+    setResultsDisplayed(false);
     setshowResulsWindow({ ...showResulsWindow, active: false }); 
   };
   const results = [
@@ -147,16 +152,14 @@ function VideoSection({
 
   return (
     <>
-     {showResulsWindow.active && <AthleticsResults
+     {showResulsWindow.active && <Results
         eventName="800m"
         videoTitle="Belgian Championships 2024"
         results={results}
         handleCloseResults={handleCloseResults}
       /> }
-  
-    <div className={`relative w-full h-full snap-start ${
-      showResulsWindow.active ? "hidden absolute" : ""
-    }`}>
+
+    <div className={`relative w-full h-full snap-start ${resultsDisplayed && "hidden"}` }>
     { handleBackToMenu && <BackIcon onBack={handleBackToMenu} Isscroll={Isscroll} />}
   
     <Video url={url} Isscroll={Isscroll} index={index} setVideoRef={setVideoRef} muted={muted} videoRef={videoRef}/> 
@@ -166,10 +169,6 @@ function VideoSection({
         handleMuteUnmute={handleMuteUnmute}
       />
     </div>
-
-   
-     
-    
     </>
   );
 }
