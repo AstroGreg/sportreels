@@ -11,24 +11,7 @@ interface VideoProps {
 
 function Video({ url, Isscroll, setVideoRef, muted, videoRef} : VideoProps) {
 
-  const { currentTime, duration, setCurrentTime, played } = useVideo(videoRef);
-
-  const onVideoPress = () => {
-    if (videoRef.current) {
-      videoRef.current.paused ? videoRef.current.play() : videoRef.current.pause();
-    }
-  };
-
-
-  const handleSkipTo = (e) => {
-    console.log(e.target.value);
-    const newTime = (e.target.value / 100) * duration;
-    if (videoRef.current) {
-      videoRef.current.currentTime = newTime;
-      setCurrentTime(newTime);
-    }
-  };
-
+  const { currentTime, duration, setCurrentTime, played, handleSkipTo, onVideoPress} = useVideo(videoRef);
 
   return (
     <>

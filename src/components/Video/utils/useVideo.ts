@@ -34,5 +34,22 @@ export function useVideo(videoRef: MutableRefObject<HTMLVideoElement | null>) {
     };
   }, [handleLoadedMetadata, handleTimeUpdate, videoRef]);
 
-  return { currentTime, duration, played, setCurrentTime };
+
+  const onVideoPress = () => {
+    if (videoRef.current) {
+      videoRef.current.paused ? videoRef.current.play() : videoRef.current.pause();
+    }
+  };
+
+
+  const handleSkipTo = (e: any ) => {
+    const newTime = (e.target.value / 100) * duration;
+    if (videoRef.current) {
+      videoRef.current.currentTime = newTime;
+      setCurrentTime(newTime);
+    }
+  };
+
+
+  return { currentTime, duration, played, setCurrentTime, onVideoPress, handleSkipTo };
 }
