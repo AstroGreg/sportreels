@@ -2,6 +2,7 @@ import React,  {useState, useRef, useEffect} from "react";
 import VideoFooter from "./VideoFooter/VideoFooter";
 import VideoSidebar from "./VideoSidebar/VideoSidebar";
 import Results from "./Results/results";
+import ReportModal from "./Report/ReportModel";
 import BackIcon from "./BackIcon";
 import Video from "./Video";
 
@@ -34,7 +35,21 @@ function VideoSection({
 } : VideoSectionProps) {
 
   const videoRef = useRef(null);
-  
+  const [isModalOpen, setIsModalOpen] = useState(false);
+
+  const openReportModal = () => {
+    setIsModalOpen(true);
+  };
+
+  const closeReportModal = () => {
+    setIsModalOpen(false);
+  };
+
+  const handleReportSubmit = (reportData) => {
+    // Handle the report submission (send to server, log, etc.)
+    console.log("Report Submitted: ", reportData);
+  };
+
   const [showResulsWindow, setshowResulsWindow] = useState({
     active: false,
     title: "title",
@@ -158,15 +173,22 @@ function VideoSection({
         results={results}
         handleCloseResults={handleCloseResults}
       /> }
+       {isModalOpen && (
+        <ReportModal
+          onClose={closeReportModal}
+          onSubmit={handleReportSubmit}
+        />
+      )}
 
     <div className={`relative w-full h-full snap-start ${resultsDisplayed && "hidden"}` }>
-    { handleBackToMenu && <BackIcon onBack={handleBackToMenu} Isscroll={Isscroll} />}
+    { handleBackToMenu && <BackIcon onBack={handleBackToMenu} />}
   
     <Video url={url} Isscroll={Isscroll} index={index} setVideoRef={setVideoRef} muted={muted} videoRef={videoRef}/> 
       <VideoFooter title={title} description={description} handleShowResults={handleShowResults} />
       <VideoSidebar
         muted={muted}
         handleMuteUnmute={handleMuteUnmute}
+        openReportModal={openReportModal} 
       />
     </div>
     </>

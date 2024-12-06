@@ -4,7 +4,7 @@ import { useCallback, useEffect, useState, MutableRefObject } from "react";
 export function useVideo(videoRef: MutableRefObject<HTMLVideoElement | null>) {
   const [currentTime, setCurrentTime] = useState<number>(0);
   const [duration, setDuration] = useState<number>(0);
-  const [playedPercentage, setPlayedPercentage] = useState<number>(0);
+  const [played, setPlayed] = useState<number>(0);
 
   const handleLoadedMetadata = useCallback(() => {
     if (videoRef.current) {
@@ -16,7 +16,7 @@ export function useVideo(videoRef: MutableRefObject<HTMLVideoElement | null>) {
     if (videoRef.current) {
       const current = videoRef.current.currentTime;
       setCurrentTime(current);
-      setPlayedPercentage((current / videoRef.current.duration) * 100);
+      setPlayed((current / videoRef.current.duration) * 100);
     }
   }, [videoRef]);
 
@@ -34,5 +34,5 @@ export function useVideo(videoRef: MutableRefObject<HTMLVideoElement | null>) {
     };
   }, [handleLoadedMetadata, handleTimeUpdate, videoRef]);
 
-  return { currentTime, duration, playedPercentage, setCurrentTime };
+  return { currentTime, duration, played, setCurrentTime };
 }

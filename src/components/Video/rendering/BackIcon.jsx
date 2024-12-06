@@ -3,13 +3,12 @@ import React from "react";
 
 interface BackIconProps {
   onBack: () => void;
-  Isscroll: boolean;
 }
 
 function BackIcon({ onBack, Isscroll  } : BackIconProps) {
   return (
-    <>
-   {!Isscroll && 
+
+
     <div
       className="absolute top-4 left-4 p-2 rounded-full bg-black bg-opacity-50 hover:bg-opacity-70 cursor-pointer z-50"
       onClick={onBack}
@@ -30,7 +29,7 @@ function BackIcon({ onBack, Isscroll  } : BackIconProps) {
       </svg>
     </div>
 
-    }       </>
+
   );
 }
 

@@ -1,6 +1,5 @@
 import React, { useE} from "react";
 import { useVideo } from "../utils/useVideo";
-import { calculatePlayedPercentage } from "../utils/videoUtils";
 import ProgressSlider from "./ProgressSlider/ProgressSlider";
 
 interface VideoProps {
@@ -12,7 +11,7 @@ interface VideoProps {
 
 function Video({ url, Isscroll, setVideoRef, muted, videoRef} : VideoProps) {
 
-  const { currentTime, duration, setCurrentTime } = useVideo(videoRef);
+  const { currentTime, duration, setCurrentTime, played } = useVideo(videoRef);
 
   const onVideoPress = () => {
     if (videoRef.current) {
@@ -20,7 +19,6 @@ function Video({ url, Isscroll, setVideoRef, muted, videoRef} : VideoProps) {
     }
   };
 
-  const played = calculatePlayedPercentage(currentTime, duration);
 
   const handleSkipTo = (e) => {
     console.log(e.target.value);

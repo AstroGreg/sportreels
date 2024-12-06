@@ -3,7 +3,7 @@ import { default as mute} from "../../icons/mute.svg";
 import { default as unmute} from "../../icons/unmute.svg";
 import { default as share} from "../../icons/share.svg";
 
-function VideoSidebar({ muted, handleMuteUnmute }) {
+function VideoSidebar({ muted, handleMuteUnmute, openReportModal }) {
   const [copied, setCopied] = useState(false);
 
   const handleShare = () => {
@@ -64,9 +64,9 @@ function VideoSidebar({ muted, handleMuteUnmute }) {
       >
       
         {muted ? (
-           <img src={unmute} alt="unmute" className="h-6" />
+           <img src={mute} alt="mute" className="h-6" />
         ) : (
-            <img src={mute} alt="mute" className="h-6"  />
+            <img src={unmute} alt="unmute" className="h-6"  />
         )}
       </div>
 
@@ -78,6 +78,16 @@ function VideoSidebar({ muted, handleMuteUnmute }) {
         <img src={share} alt="share" className="h-6" />
       </div>
 
+      {/* Report Mistake Icon */}
+      <div
+        className="p-2 mb-2 text-center rounded-full bg-black bg-opacity-50 hover:bg-opacity-70 cursor-pointer z-2"
+        onClick={openReportModal}
+      >
+        {/* Report Icon SVG */}
+        <svg xmlns="http://www.w3.org/2000/svg" className="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M14 2H6a2 2 0 00-2 2v16l4-4h10a2 2 0 002-2V4a2 2 0 00-2-2z" />
+        </svg>
+      </div>
       {/* Copied Message */}
       {copied && (
         <div className="absolute bottom-12 right-2 p-2 bg-blue-600 text-sm rounded-md shadow-md z-1">
