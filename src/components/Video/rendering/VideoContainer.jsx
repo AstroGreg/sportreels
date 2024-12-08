@@ -1,4 +1,4 @@
-import React, { useEffect, useRef, useCallback, useState } from "react";
+import React, { useState } from "react";
 import VideoSection from "./VideoSection";
 import { useMute } from "../utils/useMute";
 import { useVideoPlaybackOnScroll } from "../utils/useVideoPlaybackOnScroll";

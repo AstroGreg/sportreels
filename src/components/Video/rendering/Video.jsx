@@ -12,7 +12,7 @@ interface VideoProps {
 function Video({ url, Isscroll, setVideoRef, muted} : VideoProps) {
 
   const videoRef = useRef(null);
-  const { currentTime, duration, setCurrentTime, played, handleSkipTo, onVideoPress} = useVideo(videoRef);
+  const {played, handleSkipTo, onVideoPress} = useVideo(videoRef);
 
   return (
     <>
@@ -23,7 +23,7 @@ function Video({ url, Isscroll, setVideoRef, muted} : VideoProps) {
           videoRef.current = ref;
           setVideoRef(ref); 
         }}
-        className="absolute top-0 w-full h-full object-cover  z-0"
+        className="absolute top-0 z-0 object-cover w-full h-full"
         playsInline
         loop
         muted={muted}

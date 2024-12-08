@@ -1,4 +1,4 @@
-import { useState, useEffect, useCallback } from 'react';
+import { useState, useEffect, useCallback } from "react";
 
 function useScrollDetection(containerRef: React.RefObject<HTMLElement>) {
   const [isScrolling, setIsScrolling] = useState(0);
@@ -23,18 +23,26 @@ function useScrollDetection(containerRef: React.RefObject<HTMLElement>) {
   return isScrolling;
 }
 
-function startScrolling(setIsScrolling: React.Dispatch<React.SetStateAction<number>>) {
+function startScrolling(
+  setIsScrolling: React.Dispatch<React.SetStateAction<number>>
+) {
   setIsScrolling(1);
   setTimeout(() => {
     setIsScrolling(0);
   }, 1000);
 }
 
-function attachScrollListener(container: HTMLElement, handleScroll: EventListener) {
+function attachScrollListener(
+  container: HTMLElement,
+  handleScroll: EventListener
+) {
   container.addEventListener("scroll", handleScroll);
 }
 
-function detachScrollListener(container: HTMLElement, handleScroll: EventListener) {
+function detachScrollListener(
+  container: HTMLElement,
+  handleScroll: EventListener
+) {
   container.removeEventListener("scroll", handleScroll);
 }
 

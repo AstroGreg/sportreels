@@ -88,21 +88,21 @@ const Search = ({ Nav }: { Nav: React.ReactNode }) => {
   return (
     <div className="max-w-[540px] w-full bg-gray-100 rounded-lg relative">
       {/* Sticky Search Bar */}
-      <div className="p-6 sticky top-0 bg-white rounded-b-3xl shadow-lg mb-3 z-50">
-        <h1 className="text-2xl font-semibold text-gray-800 text-center">Search Videos</h1>
-        <div className="mt-4 flex justify-center items-center space-x-4">
+      <div className="sticky top-0 z-50 p-6 mb-3 bg-white shadow-lg rounded-b-3xl">
+        <h1 className="text-2xl font-semibold text-center text-gray-800">Search Videos</h1>
+        <div className="flex items-center justify-center mt-4 space-x-4">
           {/* Search Input */}
           <input
             type="text"
             placeholder={`Search by ${searchType.charAt(0).toUpperCase() + searchType.slice(1)}`}
             value={query}
             onChange={handleSearchInput}
-            className="border border-gray-300 py-2 px-4 w-full focus:outline-none"
+            className="w-full px-4 py-2 border border-gray-300 focus:outline-none"
           />
         </div>
 
         {/* Filter Types (Horizontal Scroll with Tiles) */}
-        <div className="mt-4 flex overflow-x-auto space-x-4">
+        <div className="flex mt-4 space-x-4 overflow-x-auto">
           {["competition", "athlete", "location"].map((type) => (
             <div
               key={type}
@@ -122,9 +122,9 @@ const Search = ({ Nav }: { Nav: React.ReactNode }) => {
         </div>
 
         {/* Selected Filters */}
-        <div className="mt-4 flex flex-wrap gap-2">
+        <div className="flex flex-wrap gap-2 mt-4">
           {Object.entries(filters).map(([key, value]) => (
-            <div key={key} className="flex items-center bg-blue-500 text-white py-1 px-3 rounded-full">
+            <div key={key} className="flex items-center px-3 py-1 text-white bg-blue-500 rounded-full">
               <span>{`${key.charAt(0).toUpperCase() + key.slice(1)}: ${value}`}</span>
               <button
                 className="ml-2 text-xs font-bold"
@@ -148,13 +148,13 @@ const Search = ({ Nav }: { Nav: React.ReactNode }) => {
           {events.map((event, index) => (
             <div
               key={index}
-              className="bg-white shadow-lg rounded-lg p-4 flex items-center cursor-pointer hover:scale-105 hover:shadow-xl transition-transform"
+              className="flex items-center p-4 transition-transform bg-white rounded-lg shadow-lg cursor-pointer hover:scale-105 hover:shadow-xl"
               onClick={() => handleCardClick(event.video)}
             >
-              <div className="flex-shrink-0 bg-blue-500 text-white p-3 rounded-full">
+              <div className="flex-shrink-0 p-3 text-white bg-blue-500 rounded-full">
                 <AiOutlineCalendar size={24} />
               </div>
-              <div className="ml-4 flex-1">
+              <div className="flex-1 ml-4">
                 <h3 className="text-lg font-semibold text-gray-800">{event.competition}</h3>
                 <p className="text-sm text-gray-500">
                   {event.date} - {event.location}
@@ -166,7 +166,7 @@ const Search = ({ Nav }: { Nav: React.ReactNode }) => {
       </div>
     ))
   ) : (
-    <div className="text-center pt-5">
+    <div className="pt-5 text-center">
             <img src={Elie} alt="Placeholder" className="object-cover w-full mb-5" />
          <p className="text-gray-600">No results found.</p>
 

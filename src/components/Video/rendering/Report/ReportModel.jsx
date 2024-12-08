@@ -22,14 +22,16 @@ const ReportModal = ({ onClose, onSubmit }) => {
   };
 
   return (
-    <div className="fixed inset-0 flex items-center justify-center z-50 bg-black bg-opacity-50">
-      <div className="bg-white p-6 rounded-xl shadow-lg max-w-lg mx-7 w-full relative">
+    <div className="fixed inset-0 z-50 flex items-center justify-center bg-black bg-opacity-50">
+      <div className="relative w-full max-w-lg p-6 bg-white shadow-lg rounded-xl mx-7">
         {/* Title and Close Button */}
         <div className="flex justify-between mb-4">
-          <h2 className="text-xl font-semibold text-gray-800">Report Mistake</h2>
+          <h2 className="text-xl font-semibold text-gray-800">
+            Report Mistake
+          </h2>
           <button
             onClick={onClose}
-            className="absolute top-2 right-4 text-gray-500 hover:text-gray-700 text-xl"
+            className="absolute text-xl text-gray-500 top-2 right-4 hover:text-gray-700"
           >
             &times;
           </button>
@@ -41,7 +43,9 @@ const ReportModal = ({ onClose, onSubmit }) => {
             className="transition-opacity duration-300 ease-in-out"
             style={{ opacity: currentStep === 2 ? 1 : 0 }}
           >
-            <h3 className="text-lg font-semibold text-gray-800 mb-4">Choose a reason for the report:</h3>
+            <h3 className="mb-4 text-lg font-semibold text-gray-800">
+              Choose a reason for the report:
+            </h3>
             <div className="space-y-4">
               <label className="flex items-center">
                 <input
@@ -93,11 +97,11 @@ const ReportModal = ({ onClose, onSubmit }) => {
               </label>
             </div>
 
-            <div className="mt-6 flex justify-end">
+            <div className="flex justify-end mt-6">
               <button
                 onClick={() => setCurrentStep(3)} // Move to description step
                 disabled={!selectedOption} // Disable until an option is selected
-                className="bg-blue-500 text-white px-6 py-2 rounded-lg hover:bg-blue-600 transition disabled:bg-gray-400 disabled:cursor-not-allowed"
+                className="px-6 py-2 text-white transition bg-blue-500 rounded-lg hover:bg-blue-600 disabled:bg-gray-400 disabled:cursor-not-allowed"
               >
                 Next
               </button>
@@ -115,20 +119,20 @@ const ReportModal = ({ onClose, onSubmit }) => {
               placeholder="Add a short description"
               value={description}
               onChange={(e) => setDescription(e.target.value)}
-              className="w-full mt-4 p-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
+              className="w-full p-3 mt-4 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
             />
 
-            <div className="mt-6 flex justify-between">
+            <div className="flex justify-between mt-6">
               <button
                 onClick={() => setCurrentStep(2)} // Move to category selection
-                className="bg-gray-300 text-gray-700 px-6 py-2 rounded-lg hover:bg-gray-400 transition"
+                className="px-6 py-2 text-gray-700 transition bg-gray-300 rounded-lg hover:bg-gray-400"
               >
                 Previous
               </button>
               <button
                 onClick={() => setCurrentStep(4)} // Move to review step
                 disabled={!selectedOption} // Disable until an option is selected
-                className="bg-blue-500 text-white px-6 py-2 rounded-lg hover:bg-blue-600 transition disabled:bg-gray-400 disabled:cursor-not-allowed"
+                className="px-6 py-2 text-white transition bg-blue-500 rounded-lg hover:bg-blue-600 disabled:bg-gray-400 disabled:cursor-not-allowed"
               >
                 Next
               </button>
@@ -142,7 +146,9 @@ const ReportModal = ({ onClose, onSubmit }) => {
             className="transition-opacity duration-300 ease-in-out"
             style={{ opacity: currentStep === 4 ? 1 : 0 }}
           >
-            <h3 className="text-lg font-semibold text-gray-800 mb-4">Review Your Report</h3>
+            <h3 className="mb-4 text-lg font-semibold text-gray-800">
+              Review Your Report
+            </h3>
             <div className="mb-4">
               <strong>Reason: </strong>
               <span className="text-gray-600">{selectedOption}</span>
@@ -152,17 +158,19 @@ const ReportModal = ({ onClose, onSubmit }) => {
               <p className="text-gray-600">{description}</p>
             </div>
 
-            <div className="mt-6 flex justify-between">
+            <div className="flex justify-between mt-6">
               <button
                 onClick={() => setCurrentStep(2)} // Go back to description step if needed
-                className="bg-gray-300 text-gray-700 px-6 py-2 rounded-lg hover:bg-gray-400 transition"
+                className="px-6 py-2 text-gray-700 transition bg-gray-300 rounded-lg hover:bg-gray-400"
               >
                 Edit
               </button>
               <button
                 onClick={handleSubmit} // Submit the report
                 disabled={isSubmitting} // Disable the button while submitting
-                className={`bg-blue-500 text-white px-6 py-2 rounded-lg hover:bg-blue-600 transition ${isSubmitting ? 'opacity-50 cursor-not-allowed' : ''}`}
+                className={`bg-blue-500 text-white px-6 py-2 rounded-lg hover:bg-blue-600 transition ${
+                  isSubmitting ? "opacity-50 cursor-not-allowed" : ""
+                }`}
               >
                 {isSubmitting ? "Submitting..." : "Submit"}
               </button>

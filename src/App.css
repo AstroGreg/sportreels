@@ -13,19 +13,21 @@
   }
 }
 
-
 html {
   scroll-snap-type: y mandatory;
   /* height: fill-available;
   height: -webkit-fill-available; */
 }
 
-html, body {
+html,
+body {
   height: calc(var(--vh) * 100); /* Uses the dynamically set --vh property */
 }
 
 .app {
-  height: calc(var(--vh) * 100); /* Dynamically calculated full viewport height */
+  height: calc(
+    var(--vh) * 100
+  ); /* Dynamically calculated full viewport height */
   overflow: hidden;
   width: 100vw;
   display: flex;
@@ -42,7 +44,6 @@ html, body {
   aspect-ratio: 9 / 16;
   overflow-y: scroll;
   scroll-snap-type: y mandatory;
-
 }
 /* Hide scrollbar for Chrome, Safari and Opera */
 .app__videos::-webkit-scrollbar {
@@ -65,7 +66,8 @@ html, body {
   } */
 }
 
-input, button {
+input,
+button {
   outline: none;
 }
 
@@ -81,4 +83,3 @@ ul {
 ul li {
   border-bottom: 1px solid #e5e7eb;
 }
-

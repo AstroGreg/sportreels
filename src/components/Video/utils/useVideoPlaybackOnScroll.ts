@@ -21,7 +21,10 @@ export const useVideoPlaybackOnScroll = (
       });
     };
 
-    const observer = new IntersectionObserver(handleIntersection, observerOptions);
+    const observer = new IntersectionObserver(
+      handleIntersection,
+      observerOptions
+    );
 
     videoRefs.current.forEach((videoRef) => {
       if (videoRef) observer.observe(videoRef);

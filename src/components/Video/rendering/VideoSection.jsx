@@ -1,4 +1,4 @@
-import React,  {useState, useRef, useEffect} from "react";
+import React from "react";
 import VideoFooter from "./VideoFooter/VideoFooter";
 import VideoSidebar from "./VideoSidebar/VideoSidebar";
 import { useShowResults }  from "../utils/useShowResults";

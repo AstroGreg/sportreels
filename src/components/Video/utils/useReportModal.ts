@@ -12,9 +12,7 @@ export const useReportModal = () => {
   };
 
   const handleReportSubmit = (reportData: any) => {
-    
     console.log("Report Submitted: ", reportData);
-
   };
 
   return {

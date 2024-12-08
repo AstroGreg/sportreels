@@ -9,18 +9,15 @@ const competitions = [
   { id: 3, name: "Memorial Van Damme" },
 ]; // Mock competition list
 
-const events = [
-  "400m", "200m", "High Jump", "100m", "Long Jump"
-]; // Mock event list
+const events = ["400m", "200m", "High Jump", "100m", "Long Jump"]; // Mock event list
 
-const heats = [
-  "FINAL", "Heat 1", "Heat 2", "Heat 3", "Semi-Final"
-]; // Mock heats
+const heats = ["FINAL", "Heat 1", "Heat 2", "Heat 3", "Semi-Final"]; // Mock heats
 
 const Upload = () => {
   const [video, setVideo] = useState(null);
   const [competitionQuery, setCompetitionQuery] = useState("");
-  const [filteredCompetitions, setFilteredCompetitions] = useState(competitions);
+  const [filteredCompetitions, setFilteredCompetitions] =
+    useState(competitions);
   const [selectedCompetition, setSelectedCompetition] = useState(null);
   const [newCompetitionName, setNewCompetitionName] = useState("");
   const [createMode, setCreateMode] = useState(false);
@@ -59,7 +56,10 @@ const Upload = () => {
   // Handle new competition creation
   const handleCreateCompetition = () => {
     if (newCompetitionName.trim() !== "") {
-      const newCompetition = { id: competitions.length + 1, name: newCompetitionName };
+      const newCompetition = {
+        id: competitions.length + 1,
+        name: newCompetitionName,
+      };
       competitions.push(newCompetition); // Ideally, update the database here
       setSelectedCompetition(newCompetition);
       setCreateMode(false);
@@ -105,10 +105,10 @@ const Upload = () => {
     if (uploadStatus === "success") {
       return (
         <div className="flex flex-col items-center text-white">
-          <FaCheckCircle className="text-green-500 text-5xl" />
+          <FaCheckCircle className="text-5xl text-green-500" />
           <p className="mt-4 text-lg text-green-600">Upload Successful!</p>
           <button
-            className="mt-4 px-6 py-2 bg-blue-600 text-white rounded"
+            className="px-6 py-2 mt-4 text-white bg-blue-600 rounded"
             onClick={() => resetUploadFlow()} // Reset the upload flow
           >
             Go to Upload Again
@@ -118,10 +118,10 @@ const Upload = () => {
     } else {
       return (
         <div className="flex flex-col items-center text-white">
-          <FaTimesCircle className="text-red-500 text-5xl" />
+          <FaTimesCircle className="text-5xl text-red-500" />
           <p className="mt-4 text-lg text-red-600">Upload Failed</p>
           <button
-            className="mt-4 px-6 py-2 bg-blue-600 text-white rounded"
+            className="px-6 py-2 mt-4 text-white bg-blue-600 rounded"
             onClick={() => setUploadStatus(null)} // Reset status and try again
           >
             Retry
@@ -135,19 +135,24 @@ const Upload = () => {
   const renderPreviewScreen = () => {
     return (
       <div className="flex flex-col items-center text-gray-700">
-        <h2 className="text-3xl font-bold mb-4">Preview Your Upload</h2>
+        <h2 className="mb-4 text-3xl font-bold">Preview Your Upload</h2>
         <p>Video: {video ? video.name : "No video uploaded"}</p>
-        <p>Competition: {selectedCompetition ? selectedCompetition.name : "No competition selected"}</p>
+        <p>
+          Competition:{" "}
+          {selectedCompetition
+            ? selectedCompetition.name
+            : "No competition selected"}
+        </p>
         <p>Event: {selectedEvent || "No event selected"}</p>
         <p>Heat: {selectedHeat || "No heat selected"}</p>
         <button
           onClick={handleUpload}
-          className="mt-4 px-6 py-2 bg-blue-600 text-white rounded"
+          className="px-6 py-2 mt-4 text-white bg-blue-600 rounded"
         >
           Confirm and Upload
         </button>
         <button
-          className="mt-2 px-6 py-2 bg-gray-600 text-white rounded"
+          className="px-6 py-2 mt-2 text-white bg-gray-600 rounded"
           onClick={() => setCurrentStep(2)} // Go back to competition selection
         >
           Edit Selection
@@ -159,13 +164,13 @@ const Upload = () => {
   const renderCompetitionSelectionScreen = () => {
     return (
       <div className="flex flex-col items-center text-black">
-        <h2 className="text-3xl font-bold mb-4">Select Competition</h2>
+        <h2 className="mb-4 text-3xl font-bold">Select Competition</h2>
         <input
           type="text"
           value={competitionQuery}
           onChange={handleCompetitionSearch}
           placeholder="Search for competition"
-          className="mb-4 border p-2 rounded text-black"
+          className="p-2 mb-4 text-black border rounded"
         />
         <ul className="w-full">
           {filteredCompetitions.map((comp) => (
@@ -182,7 +187,9 @@ const Upload = () => {
         </ul>
         {filteredCompetitions.length === 0 && !createMode && (
           <div>
-            <p className="mt-4">Competition not found? <strong>Not listed?</strong></p>
+            <p className="mt-4">
+              Competition not found? <strong>Not listed?</strong>
+            </p>
             <button
               className="mt-4 text-blue-500"
               onClick={() => setCreateMode(true)}
@@ -198,11 +205,11 @@ const Upload = () => {
               value={newCompetitionName}
               onChange={(e) => setNewCompetitionName(e.target.value)}
               placeholder="Enter competition name"
-              className="mb-4 border p-2 rounded text-black"
+              className="p-2 mb-4 text-black border rounded"
             />
             <button
               onClick={handleCreateCompetition}
-              className="mt-4 px-6 py-2 bg-blue-600 text-white rounded"
+              className="px-6 py-2 mt-4 text-white bg-blue-600 rounded"
             >
               Save Competition
             </button>
@@ -210,7 +217,7 @@ const Upload = () => {
         )}
         {selectedCompetition && (
           <button
-            className="mt-4 px-6 py-2 bg-blue-600 text-white rounded"
+            className="px-6 py-2 mt-4 text-white bg-blue-600 rounded"
             onClick={() => setCurrentStep(3)} // Next step: select event and heat
           >
             Next: Select Event and Heat
@@ -222,7 +229,7 @@ const Upload = () => {
 
   const renderLoadingScreen = () => {
     return (
-      <div className="flex justify-center items-center text-gray-700">
+      <div className="flex items-center justify-center text-gray-700">
         <div className="spinner-border animate-spin"></div>
         <p>Uploading...</p>
       </div>
@@ -232,12 +239,12 @@ const Upload = () => {
   const renderEventAndHeatSelectionScreen = () => {
     return (
       <div className="flex flex-col items-center text-white">
-        <h2 className="text-3xl font-bold mb-4">Select Event and Heat</h2>
-        
+        <h2 className="mb-4 text-3xl font-bold">Select Event and Heat</h2>
+
         <select
           value={selectedEvent}
           onChange={handleEventSelection}
-          className="mb-4 border p-2 rounded text-black"
+          className="p-2 mb-4 text-black border rounded"
         >
           <option value="">Select Event</option>
           {events.map((event, index) => (
@@ -250,7 +257,7 @@ const Upload = () => {
         <select
           value={selectedHeat}
           onChange={handleHeatSelection}
-          className="mb-4 border p-2 rounded text-black"
+          className="p-2 mb-4 text-black border rounded"
         >
           <option value="">Select Heat</option>
           {heats.map((heat, index) => (
@@ -262,7 +269,7 @@ const Upload = () => {
 
         <button
           onClick={() => setCurrentStep(4)} // Go to preview step
-          className="mt-4 px-6 py-2 bg-blue-600 text-white rounded"
+          className="px-6 py-2 mt-4 text-white bg-blue-600 rounded"
         >
           Next: Preview
         </button>
@@ -281,12 +288,12 @@ const Upload = () => {
     if (currentStep === 1) {
       return (
         <div className="flex flex-col items-center">
-          <AiOutlineVideoCamera className="text-5xl mb-4" />
+          <AiOutlineVideoCamera className="mb-4 text-5xl" />
           <input type="file" accept="video/*" onChange={handleVideoUpload} />
           {video && <p className="mt-4">Video: {video.name}</p>}
           <button
             onClick={() => setCurrentStep(2)}
-            className="mt-4 px-6 py-2 bg-blue-600 text-white rounded"
+            className="px-6 py-2 mt-4 text-white bg-blue-600 rounded"
             disabled={!video} // Disable button until a video is uploaded
           >
             Next: Select Competition
@@ -312,7 +319,7 @@ const Upload = () => {
 
   return (
     <div
-      className="flex justify-center items-center h-full bg-cover bg-center"
+      className="flex items-center justify-center h-full bg-center bg-cover"
       style={{ backgroundImage: `url(${Elie})` }}
     >
       <div className="w-full max-w-md p-6 bg-white rounded-lg shadow-lg">

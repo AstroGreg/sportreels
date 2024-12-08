@@ -9,7 +9,12 @@ interface Result {
   isSB: boolean;
 }
 
-export const useShowResults = (initialResults: Result[], title: string, description: string, setResultsDisplayed: (boolean: Boolean) => void) => {
+export const useShowResults = (
+  initialResults: Result[],
+  title: string,
+  description: string,
+  setResultsDisplayed: (boolean: Boolean) => void
+) => {
   const [resultsWindow, setResultsWindow] = useState({
     active: false,
     title: "",

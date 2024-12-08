@@ -53,7 +53,9 @@ const Menu = () => {
         </button>
         <button
           className={`p-4 text-sm ${
-            activeTab === "account" ? "text-blue-600 font-bold" : "text-gray-600"
+            activeTab === "account"
+              ? "text-blue-600 font-bold"
+              : "text-gray-600"
           }`}
           onClick={() => setActiveTab("account")}
         >
@@ -70,11 +72,11 @@ const Menu = () => {
       </div>
 
       {/* Tab Content */}
-      <div className="flex-1 overflow-y-auto p-6">
+      <div className="flex-1 p-6 overflow-y-auto">
         {/* Preferred Events */}
         {activeTab === "events" && (
           <div>
-            <h1 className="text-xl font-bold mb-4">Select Preferred Events</h1>
+            <h1 className="mb-4 text-xl font-bold">Select Preferred Events</h1>
             <div className="grid grid-cols-2 gap-4">
               {availableEvents.map((event) => (
                 <button
@@ -96,14 +98,14 @@ const Menu = () => {
         {/* Account Details */}
         {activeTab === "account" && (
           <div>
-            <h1 className="text-xl font-bold mb-4">Account Details</h1>
+            <h1 className="mb-4 text-xl font-bold">Account Details</h1>
             <div className="mb-4">
               <label className="block text-sm font-medium">Username</label>
               <input
                 type="text"
                 value={username}
                 onChange={(e) => setUsername(e.target.value)}
-                className="border border-gray-300 p-2 w-full"
+                className="w-full p-2 border border-gray-300"
               />
             </div>
             <div className="mb-4">
@@ -112,7 +114,7 @@ const Menu = () => {
                 type="email"
                 value={email}
                 onChange={(e) => setEmail(e.target.value)}
-                className="border border-gray-300 p-2 w-full"
+                className="w-full p-2 border border-gray-300"
               />
             </div>
             <div className="mb-4">
@@ -122,7 +124,7 @@ const Menu = () => {
                 value={password}
                 onChange={(e) => setPassword(e.target.value)}
                 placeholder="Change password"
-                className="border border-gray-300 p-2 w-full"
+                className="w-full p-2 border border-gray-300"
               />
             </div>
           </div>
@@ -131,14 +133,14 @@ const Menu = () => {
         {/* Personal Info */}
         {activeTab === "info" && (
           <div>
-            <h1 className="text-xl font-bold mb-4">Personal Info</h1>
+            <h1 className="mb-4 text-xl font-bold">Personal Info</h1>
             <div className="mb-4">
               <label className="block text-sm font-medium">Club</label>
               <input
                 type="text"
                 value={club}
                 onChange={(e) => setClub(e.target.value)}
-                className="border border-gray-300 p-2 w-full"
+                className="w-full p-2 border border-gray-300"
               />
             </div>
             <div className="mb-4">
@@ -146,7 +148,7 @@ const Menu = () => {
               <select
                 value={gender}
                 onChange={(e) => setGender(e.target.value)}
-                className="border border-gray-300 p-2 w-full"
+                className="w-full p-2 border border-gray-300"
               >
                 <option value="">Select Gender</option>
                 <option value="Male">Male</option>
@@ -160,7 +162,7 @@ const Menu = () => {
                 type="date"
                 value={birthdate}
                 onChange={(e) => setBirthdate(e.target.value)}
-                className="border border-gray-300 p-2 w-full"
+                className="w-full p-2 border border-gray-300"
               />
             </div>
             <div className="mb-4">
@@ -169,7 +171,7 @@ const Menu = () => {
                 type="text"
                 value={nationality}
                 onChange={(e) => setNationality(e.target.value)}
-                className="border border-gray-300 p-2 w-full"
+                className="w-full p-2 border border-gray-300"
               />
             </div>
           </div>
@@ -180,7 +182,7 @@ const Menu = () => {
       <div className="p-4 bg-white border-t border-gray-300">
         <button
           onClick={saveChanges}
-          className="w-full py-2 bg-blue-500 text-white font-medium rounded"
+          className="w-full py-2 font-medium text-white bg-blue-500 rounded"
         >
           Save Changes
         </button>

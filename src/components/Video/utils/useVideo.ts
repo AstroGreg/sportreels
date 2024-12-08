@@ -1,6 +1,5 @@
 import { useCallback, useEffect, useState, MutableRefObject } from "react";
 
-
 export function useVideo(videoRef: MutableRefObject<HTMLVideoElement | null>) {
   const [currentTime, setCurrentTime] = useState<number>(0);
   const [duration, setDuration] = useState<number>(0);
@@ -34,15 +33,15 @@ export function useVideo(videoRef: MutableRefObject<HTMLVideoElement | null>) {
     };
   }, [handleLoadedMetadata, handleTimeUpdate, videoRef]);
 
-
   const onVideoPress = () => {
     if (videoRef.current) {
-      videoRef.current.paused ? videoRef.current.play() : videoRef.current.pause();
+      videoRef.current.paused
+        ? videoRef.current.play()
+        : videoRef.current.pause();
     }
   };
 
-
-  const handleSkipTo = (e: any ) => {
+  const handleSkipTo = (e: any) => {
     const newTime = (e.target.value / 100) * duration;
     if (videoRef.current) {
       videoRef.current.currentTime = newTime;
@@ -50,6 +49,12 @@ export function useVideo(videoRef: MutableRefObject<HTMLVideoElement | null>) {
     }
   };
 
-
-  return { currentTime, duration, played, setCurrentTime, onVideoPress, handleSkipTo };
+  return {
+    currentTime,
+    duration,
+    played,
+    setCurrentTime,
+    onVideoPress,
+    handleSkipTo,
+  };
 }

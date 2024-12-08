@@ -9,10 +9,7 @@ function BackIcon({ onBack, Isscroll  } : BackIconProps) {
   return (
 
 
-    <div
-      className="absolute top-4 left-4 p-2 rounded-full bg-black bg-opacity-50 hover:bg-opacity-70 cursor-pointer z-50"
-      onClick={onBack}
-    >
+    <div className="absolute z-50 p-2 bg-black bg-opacity-50 rounded-full cursor-pointer top-4 left-4 hover:bg-opacity-70" onClick={onBack}>
       <svg
         xmlns="http://www.w3.org/2000/svg"
         className="w-6 h-6 text-white"
