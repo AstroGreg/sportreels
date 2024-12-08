@@ -1,4 +1,4 @@
-import React, { useE} from "react";
+import React, { useRef } from "react";
 import { useVideo } from "../utils/useVideo";
 import ProgressSlider from "./ProgressSlider/ProgressSlider";
 
@@ -9,8 +9,9 @@ interface VideoProps {
   muted: boolean;
 }
 
-function Video({ url, Isscroll, setVideoRef, muted, videoRef} : VideoProps) {
+function Video({ url, Isscroll, setVideoRef, muted} : VideoProps) {
 
+  const videoRef = useRef(null);
   const { currentTime, duration, setCurrentTime, played, handleSkipTo, onVideoPress} = useVideo(videoRef);
 
   return (
