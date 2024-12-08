@@ -5,7 +5,7 @@ import { useShowResults }  from "../utils/useShowResults";
 import { useReportModal } from "../utils/useReportModal"
 import Results from "./Results/results";
 import ReportModal from "./Report/ReportModel";
-import BackIcon from "./BackIcon";
+import BackIcon from "../../Nav/BackIcon";
 import Video from "./Video";
 
 interface VideoSectionProps {

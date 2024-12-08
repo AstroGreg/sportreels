@@ -5,6 +5,7 @@ import Home from "./pages";
 import Upload from "./pages/Upload";
 import Search from "./pages/Search";
 import Menu from "./pages/Menu";
+import Athlete from "./pages/Athlete";
 
 function App() {
   // Dynamic viewport height update to handle mobile browser height inconsistencies
@@ -31,6 +32,7 @@ function App() {
               <Route path="/search" element={<Search />} />
               <Route path="/upload" element={<Upload />} />
               <Route path="/menu" element={<Menu />} />
+              <Route path="/athlete/:id" element={<Athlete />} />
             </Routes>
           </div>
           <div
