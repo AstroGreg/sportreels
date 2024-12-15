@@ -74,4 +74,4 @@ const AthleticsResults: React.FC<AthleticsResultsProps> = ({
   );
 };
 
-export default AthleticsResults;
+export { AthleticsResults } ;

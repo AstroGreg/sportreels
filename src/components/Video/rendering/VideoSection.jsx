@@ -3,7 +3,7 @@ import VideoFooter from "./VideoFooter/VideoFooter";
 import VideoSidebar from "./VideoSidebar/VideoSidebar";
 import { useShowResults }  from "../utils/useShowResults";
 import { useReportModal } from "../utils/useReportModal"
-import Results from "./Results/results";
+import { AthleticsResults } from "../../Competition/Results";
 import ReportModal from "./Report/ReportModel";
 import BackIcon from "../../Nav/BackIcon";
 import Video from "./Video";
@@ -54,7 +54,7 @@ function VideoSection({
 
   return (
     <>
-     {resultsWindow.active && <Results
+     {resultsWindow.active && <AthleticsResults
         eventName="800m"
         videoTitle="Belgian Championships 2024"
         results={results}
