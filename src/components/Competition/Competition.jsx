@@ -1,196 +1,146 @@
 import React, { useState } from "react";
-import { useNavigate } from "react-router-dom";
-import { AthleticsResults } from "./Results";
-import Elie from "../../fotos/Elie.jpeg";
+import { FiChevronDown, FiChevronUp } from "react-icons/fi";
+import VideoContainer from "../Video/rendering/VideoContainer";
+import { EventItem } from "./Event";
+import { SectionHeader } from "./SectionHeader";
+import { EventHeader } from "./EventHeader";
 
-const mockCompetition = {
-  name: "National Championships",
-  date: "2024-06-15",
-  location: "Main Stadium, Cityville",
-  organizer: "National Athletics Federation",
-  events: [
-    {
-      gender: "Men",
-      name: "100m",
-      heats: [
-        {
-          name: "Heat 1",
-          results: [
-            {
-              position: 1,
-              name: "John Doe",
-              club: "Elite Runners",
-              result: "10.01",
-              isPB: true,
-              isSB: false,
-            },
-            {
-              position: 2,
-              name: "Mike Smith",
-              club: "Speedsters",
-              result: "10.10",
-              isPB: false,
-              isSB: true,
-            },
-          ],
-        },
-        {
-          name: "Heat 2",
-          results: [
-            {
-              position: 1,
-              name: "James Brown",
-              club: "Fast Track",
-              result: "10.05",
-              isPB: true,
-              isSB: false,
-            },
-            {
-              position: 2,
-              name: "Samuel Lee",
-              club: "Quick Feet",
-              result: "10.12",
-              isPB: false,
-              isSB: true,
-            },
-          ],
-        },
-      ],
-    },
-    {
-      gender: "Women",
-      name: "200m",
-      heats: [
-        {
-          name: "Heat 1",
-          results: [
-            {
-              position: 1,
-              name: "Jane Smith",
-              club: "Speedsters",
-              result: "22.10",
-              isPB: true,
-              isSB: true,
-            },
-            {
-              position: 2,
-              name: "Emily Davis",
-              club: "Track Stars",
-              result: "22.50",
-              isPB: false,
-              isSB: false,
-            },
-          ],
-        },
-      ],
-    },
-  ],
-};
+interface CompetitionProps {
+  competitionName: string;
+  onSelectEvent: (videoUrl: string, title: string) => void;
+  onBack: () => void;
+}
 
-const CompetitionPage: React.FC = () => {
-  const [selectedEventIndex, setSelectedEventIndex] = useState(
-    null
-  );
-  const [selectedHeat, setSelectedHeat] = useState(null); // Store selected heat for results
-  const navigate = useNavigate();
+const loopEvents = [
+  {
+    name: "60 meter",
+    events: [
+      { time: "17:45", count: 15, category: "MIN-M", round: "Series", video: "dummy-video1.mp4" },
+      { time: "17:55", count: 12, category: "MIN-V", round: "Series", video: "dummy-video2.mp4" },
+      { time: "18:05", count: 9, category: "PUP-M", round: "Series", video: "dummy-video3.mp4" },
+      { time: "18:15", count: 6, category: "PUP-V", round: "Series", video: "dummy-video4.mp4" },
+    ]
+  },
+  {
+    name: "60 meter horden",
+    events: [
+      { time: "18:25", count: 23, category: "CAD-V", round: "Series", video: "dummy-video1.mp4" },
+      { time: "18:35", count: 16, category: "SCH-M", round: "Series", video: "dummy-video2.mp4" }
+    ]
+  }
+];
 
-  const handleToggleEvent = (index: number) => {
-    setSelectedEventIndex(index === selectedEventIndex ? null : index); // Toggle dropdown
+const veldEvents = [
+  {
+    name: "Hoogspringen",
+    events: [
+      { time: "16:30", count: 8, category: "PUP-V", round: "", video: "dummy-video3.mp4" },
+      { time: "18:00", count: 15, category: "PUP-M", round: "", video: "dummy-video4.mp4" },
+      { time: "19:15", count: 15, category: "SCH-V", round: "", video: "dummy-video1.mp4" },
+      { time: "20:45", count: 15, category: "SCH-M", round: "", video: "dummy-video2.mp4" }
+    ]
+  }
+];
+
+const Competition: React.FC<CompetitionProps> = ({
+  competitionName,
+  onSelectEvent,
+  onBack
+}) => {
+  
+  const [selectedVideo, setSelectedVideo] = useState(null);
+  const [loopOpen, setLoopOpen] = useState(false);
+  const [veldOpen, setVeldOpen] = useState(false);
+
+
+  const watchVideoClick = () => {
+    const videoProps = { url: "https://awssportreels.s3.eu-central-1.amazonaws.com/BK+studenten+2023.MP4", title: "BK Studenten", description: "blablla" };
+    setSelectedVideo(videoProps);
   };
 
-  const handleSelectHeat = (heat: any) => {
-    setSelectedHeat(heat); // Set the heat to display results
+  const handleBackToMenu = () => {
+    setSelectedVideo(null);
   };
 
-  const handleCloseResults = () => {
-    setSelectedHeat(null); // Close the results view
-  };
-
-  if (selectedHeat) {
+  if (selectedVideo) {
     return (
-      <AthleticsResults
-        eventName={`${selectedHeat.name}`}
-        videoTitle={`${mockCompetition.name}`}
-        results={selectedHeat.results}
-        handleCloseResults={handleCloseResults}
-      />
+      <VideoContainer videoUrls={[selectedVideo]} handleBackToMenu={handleBackToMenu} />
     );
   }
 
   return (
+    <div className="p-4 bg-gray-100 ">
+      <button onClick={onBack} className="inline-flex items-center mb-6 font-medium text-blue-500 transition-colors hover:text-blue-600">
+        &larr; Back to Search
+      </button>
+      <div className="max-w-3xl p-6 mx-auto bg-white rounded-lg shadow-sm">
+        <h2 className="mb-2 text-3xl font-bold text-gray-900">{competitionName}</h2>
+        <p className="mb-6 text-gray-700">Available videos</p>
 
-      <div
-        className="h-full p-6 bg-gray-200"
-
-      >
-      {/* Competition Header */}
-      <div className="p-6 mb-8 bg-white rounded-lg shadow-lg">
-        <h1 className="text-3xl font-bold text-gray-800">
-          {mockCompetition.name}
-        </h1>
-        <p className="mt-2 text-lg text-gray-600">
-          <strong>Date:</strong> {mockCompetition.date}
-        </p>
-        <p className="mt-1 text-lg text-gray-600">
-          <strong>Location:</strong> {mockCompetition.location}
-        </p>
-        <p className="mt-1 text-lg text-gray-600">
-          <strong>Organizer:</strong> {mockCompetition.organizer}
-        </p>
-      </div>
-
-      {/* Events Section */}
-      <div className="bg-white rounded-lg shadow-lg">
-        <h2 className="p-6 text-2xl font-semibold text-gray-800">Events</h2>
-        <div>
-          {mockCompetition.events.map((event, index) => (
-            <div key={index}>
-              {/* Event Row */}
-              <div
-                className={`flex items-center justify-between p-4 cursor-pointer ${
-                  selectedEventIndex === index ? "bg-gray-100" : ""
-                } hover:bg-gray-50`}
-                onClick={() => handleToggleEvent(index)}
-              >
-                <p className="text-lg font-semibold text-gray-700">{`${event.gender} ${event.name}`}</p>
-                <svg
-                  xmlns="http://www.w3.org/2000/svg"
-                  className={`w-6 h-6 transition-transform ${
-                    selectedEventIndex === index ? "rotate-180" : ""
-                  }`}
-                  fill="none"
-                  viewBox="0 0 24 24"
-                  stroke="currentColor"
-                >
-                  <path
-                    strokeLinecap="round"
-                    strokeLinejoin="round"
-                    strokeWidth={2}
-                    d="M19 9l-7 7-7-7"
-                  />
-                </svg>
-              </div>
-
-              {/* Heats Dropdown */}
-              {selectedEventIndex === index && (
-                <div className="border-t border-gray-200">
-                  {event.heats.map((heat, heatIndex) => (
-                    <div
-                      key={heatIndex}
-                      className="p-4 border-b border-gray-200 cursor-pointer hover:bg-gray-50"
-                      onClick={() => handleSelectHeat(heat)}
-                    >
-                      <p className="text-lg text-gray-600">{heat.name}</p>
-                    </div>
+        {/* Loop onderdelen */}
+        <SectionHeader
+          title="Loop onderdelen"
+          isOpen={loopOpen}
+          toggle={() => setLoopOpen(!loopOpen)}
+        />
+        {loopOpen && (
+          <div className="mt-2">
+            {loopEvents.map((onderdeel, idx) => (
+              <div key={idx} className="p-4 mt-3 bg-white rounded-lg shadow-sm">
+                <EventHeader name={onderdeel.name} />
+                <div className="mt-2 ml-2">
+                  {onderdeel.events.map((ev, i) => (
+                    <EventItem
+                      key={i}
+                      time={ev.time}
+                      count={ev.count}
+                      category={ev.category}
+                      round={ev.round}
+                      videoUrl={ev.video}
+                      onderdeelName={onderdeel.name}
+                      watchVideoClick={watchVideoClick}
+                    />
                   ))}
                 </div>
-              )}
+              </div>
+            ))}
+          </div>
+        )}
+
+        {/* Veld onderdelen */}
+        <div className="mt-6">
+          <SectionHeader
+            title="Veld onderdelen"
+            isOpen={veldOpen}
+            toggle={() => setVeldOpen(!veldOpen)}
+          />
+          {veldOpen && (
+            <div className="mt-2">
+              {veldEvents.map((onderdeel, idx) => (
+                <div key={idx} className="p-4 mt-3 bg-white rounded-lg shadow-sm">
+                  <EventHeader name={onderdeel.name} />
+                  <div className="mt-2 ml-2">
+                    {onderdeel.events.map((ev, i) => (
+                      <EventItem
+                        key={i}
+                        time={ev.time}
+                        count={ev.count}
+                        category={ev.category}
+                        round={ev.round}
+                        videoUrl={ev.video}
+                        onderdeelName={onderdeel.name}
+                        watchVideoClick={watchVideoClick}
+                      />
+                    ))}
+                  </div>
+                </div>
+              ))}
             </div>
-          ))}
+          )}
         </div>
       </div>
     </div>
   );
 };
 
-export default CompetitionPage;
+export { Competition };

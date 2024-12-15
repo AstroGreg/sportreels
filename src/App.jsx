@@ -34,7 +34,7 @@ function App() {
               <Route path="/upload" element={<Upload />} />
               <Route path="/menu" element={<Menu />} />
               <Route path="/athlete/:id" element={<Athlete />} />
-              <Route path="/Competition" element={<Competition />} />
+              <Route path="/competition/:id" element={<Competition />} />
             </Routes>
           </div>
           <div
