@@ -7,10 +7,10 @@ import Search from "./pages/Search";
 import Menu from "./pages/Menu";
 import Athlete from "./pages/Athlete";
 import Competition from "./pages/Competition";
+import "@capacitor-community/safe-area";
 
 function App() {
   const [viewport_is_set, setViewport_is_set] = React.useState(false);
-
   // Dynamic viewport height update to handle mobile browser height inconsistencies
   useEffect(() => {
     const setViewportHeight = () => {

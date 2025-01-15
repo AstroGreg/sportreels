@@ -33,7 +33,7 @@ body {
   display: flex;
   align-items: center;
   justify-content: center;
-  background-color: #0d1e3a;
+  padding-top: var(--safe-area-inset-top);
 }
 
 .app__videos {
@@ -54,6 +54,13 @@ body {
 .app__videos {
   -ms-overflow-style: none; /* IE and Edge */
   scrollbar-width: none; /* Firefox */
+}
+
+#header {
+  padding-top: var(--safe-area-inset-top);
+}
+#header {
+  padding-top: calc(var(--safe-area-inset-top) + 1rem);
 }
 
 @media only screen and (max-width: 600px) {
