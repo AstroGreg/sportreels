@@ -1,0 +1,7 @@
+<?xml version='1.0' encoding='utf-8'?>
+<resources>
+    <string name="app_name">Faba</string>
+    <string name="title_activity_main">Faba</string>
+    <string name="package_name">faba.com</string>
+    <string name="custom_url_scheme">faba.com</string>
+</resources>

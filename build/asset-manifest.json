@@ -1,0 +1,17 @@
+{
+  "files": {
+    "main.css": "/static/css/main.43ecf57f.css",
+    "main.js": "/static/js/main.f2e50376.js",
+    "static/media/Elie.jpeg": "/static/media/Elie.fe1b99fbd8af533e0597.jpeg",
+    "static/media/unmute.svg": "/static/media/unmute.7769c9fe67aebaada85a2f64bcb9e4f8.svg",
+    "static/media/mute.svg": "/static/media/mute.f88cf8c4a66e33777d95c7ce54b33ce2.svg",
+    "static/media/share.svg": "/static/media/share.4d22ff5c32606c6590f056d26f50dd2d.svg",
+    "index.html": "/index.html",
+    "main.43ecf57f.css.map": "/static/css/main.43ecf57f.css.map",
+    "main.f2e50376.js.map": "/static/js/main.f2e50376.js.map"
+  },
+  "entrypoints": [
+    "static/css/main.43ecf57f.css",
+    "static/js/main.f2e50376.js"
+  ]
+}
