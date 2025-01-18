@@ -1,6 +1,10 @@
 import React, { useState, useEffect } from "react";
 import "../../App.css";
 import { AiOutlineCalendar } from "react-icons/ai";
+import {
+  calendarOutline
+} from "ionicons/icons";
+import { IonIcon } from "@ionic/react";
 import Elie from "../../fotos/Elie.jpeg";
 import { useNavigate, useLocation } from "react-router-dom";
 
@@ -197,9 +201,7 @@ const Search = ({ Nav }: { Nav?: React.ReactNode }) => {
                     className="flex items-center p-4 transition-transform bg-white rounded-lg shadow-lg cursor-pointer hover:scale-105 hover:shadow-xl"
                     onClick={() => handleCompetitionClick(event.competition)}
                   >
-                    <div className="flex-shrink-0 p-3 text-white bg-blue-500 rounded-full">
-                      <AiOutlineCalendar size={24} />
-                    </div>
+                    <IonIcon icon={calendarOutline} className="flex-shrink-0 w-6 h-6 p-3 text-white bg-blue-500 rounded-full"    />
                     <div className="flex-1 ml-4">
                       <h3 className="text-lg font-semibold text-gray-800">{event.competition}</h3>
                       <p className="text-sm text-gray-500">

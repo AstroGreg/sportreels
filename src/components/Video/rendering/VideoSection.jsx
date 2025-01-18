@@ -20,6 +20,7 @@ interface VideoSectionProps {
   resultsDisplayed: Boolean;
   setResultsDisplayed: (state:Boolean) => void;
   muted: boolean;
+  thumbnails: {  [key: number]: string };
 }
 
 const initialResults = [
@@ -47,6 +48,7 @@ function VideoSection({
   resultsDisplayed,
   setResultsDisplayed, 
   muted,
+  thumbnails
 } : VideoSectionProps) {
   
   const { resultsWindow, showResults, closeResults, results} = useShowResults(initialResults, "Race Title", "Race Description", setResultsDisplayed);
@@ -70,7 +72,7 @@ function VideoSection({
     <div className={`relative w-full h-full snap-start ${resultsDisplayed && "hidden"}` }>
     { handleBackToMenu && <BackIcon onBack={handleBackToMenu} />}
   
-    <Video url={url} Isscroll={Isscroll} index={index} setVideoRef={setVideoRef} muted={muted}/> 
+    <Video url={url} Isscroll={Isscroll} index={index} setVideoRef={setVideoRef} muted={muted} thumbnails={thumbnails} /> 
       <VideoFooter title={title} description={description} handleShowResults={showResults} />
       <VideoSidebar
         muted={muted}
@@ -78,7 +80,7 @@ function VideoSection({
         openReportModal={openReportModal} 
       />
     </div>
-    </>
+    </> 
   );
 }
 

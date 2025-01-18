@@ -1,7 +1,12 @@
 import { useRef, useState } from "react";
 
 const useVideoRef = (
-  initialVideoUrls: { url: string; title: string; description: string }[]
+  initialVideoUrls: {
+    url: string;
+    title: string;
+    description: string;
+    thumbnails: string;
+  }[]
 ) => {
   const containerRef = useRef<HTMLDivElement | null>(null);
   const [videos, setVideos] = useState(initialVideoUrls);

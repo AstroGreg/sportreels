@@ -14,7 +14,7 @@ function VideoFooter({
 
   return (<>
 
-    <div className="absolute bottom-0 w-full px-4 pb-5 bg-gradient-to-t from-black to-transparent z-5">
+    <div className="absolute bottom-0 w-full px-2 pb-5 bg-gradient-to-t from-black to-transparent z-5">
       <div className="relative mt-4 text-white md:mt-2 md:ml-2 md:mr-2 ">
         {/* Title Section */}
         <div className="flex items-center mb-3">

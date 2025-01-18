@@ -23,11 +23,12 @@ function VideoContainer({ videoUrls, handleBackToMenu }: VideoContainerProps) {
 
   return (
     <div className={`${!resultsDisplayed && "app__videos"}`}ref={containerRef}>
-      {videos.map(({ url, title, description }, index) => (
+      {videos.map(({ url, title, description, thumbnails }, index) => (
         <VideoSection
           key={index}
           url={url}
           title={title}
+          thumbnails={thumbnails}
           description={description}
           index={index}
           setVideoRef={assignVideoRef(index)}

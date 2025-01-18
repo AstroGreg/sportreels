@@ -22,7 +22,8 @@ export const loopEvents: EventGroup[] = [
         count: 12,
         category: "MIN-V",
         round: "Series",
-        video: "dummy-video4.mp4",
+        video:
+          "https://awssportreels.s3.eu-central-1.amazonaws.com/BK+studenten+2023.MP4",
         title: "60m Heat - MIN-V",
         description: "Another 60m heat race.",
         author: "Bob",

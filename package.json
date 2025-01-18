@@ -30,7 +30,7 @@
   "scripts": {
     "start": "react-scripts start",
     "build": "react-scripts build",
-    "build_ios": "react-scripts build && npx cap sync",
+    "build_prod": "react-scripts build && npx cap sync",
     "test": "react-scripts test",
     "eject": "react-scripts eject"
   },
